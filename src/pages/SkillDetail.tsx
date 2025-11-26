@@ -1,7 +1,8 @@
-import { useParams } from "react-router";
+import { useLoaderData } from "react-router";
+import type { Skill } from "../types/Skill";
 
 export default function SkillDetail() {
-  const { id } = useParams();
+  const { skill }: { skill: Skill } = useLoaderData();
 
-  return <h2>{id}</h2>;
+  return <h2>{skill.name}</h2>;
 }

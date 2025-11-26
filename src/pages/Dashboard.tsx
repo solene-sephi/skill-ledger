@@ -13,17 +13,24 @@ export default function Dashboard() {
     <>
       <p>Nb total de compétences : {totalSkills}</p>
       <p>Nb total d'actions : {totalActions}</p>
-      <p>Dernière action: </p>
+      {/* <p>Dernière action: </p> */}
       <Link to="/add">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
           Ajouter une compétence
         </button>
       </Link>
-      <div className="mt-6 flex flex-wrap gap-6">
-        {skills.map((skill) => (
-          <SkillCard key={skill.id} skill={skill} />
-        ))}
-      </div>
+      {totalSkills > 0 ? (
+        <div className="mt-6 flex flex-wrap gap-6">
+          {skills.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
+        </div>
+      ) : (
+        <p>
+          Aucune compétence enregistrée pour le moment. Ajoutez-en une pour
+          suivre vos progrès.
+        </p>
+      )}
     </>
   );
 }
