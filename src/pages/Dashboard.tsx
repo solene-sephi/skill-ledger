@@ -1,28 +1,14 @@
 import { Link } from "react-router";
 import SkillCard from "../components/SkillCard";
-import type { Skill } from "../types/Skill";
-
-const skills: Skill[] = [
-  {
-    id: 1,
-    name: "Javascript",
-    type: "hard",
-    actionNb: 7,
-  },
-  {
-    id: 2,
-    name: "Communication d’équipe",
-    type: "soft",
-    actionNb: 12,
-  },
-];
-
-const totalSkills = skills.length;
-const totalActions = skills.reduce((accumulator, currentValue) => {
-  return (accumulator += currentValue.actionNb);
-}, 0);
+import { getAllSkills } from "../services/skills";
 
 export default function Dashboard() {
+  const skills = getAllSkills();
+  const totalSkills = skills.length;
+  const totalActions = skills.reduce((accumulator, currentValue) => {
+    return (accumulator += currentValue.actionNb);
+  }, 0);
+
   return (
     <>
       <p>Nb total de compétences : {totalSkills}</p>

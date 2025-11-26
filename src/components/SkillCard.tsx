@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Skill } from "../types/Skill";
 
 interface SkillCardProps {
@@ -12,9 +13,11 @@ export default function SkillCard({ skill }: SkillCardProps) {
         <p>Type : {skill.type}</p>
         <p>Nombre d'actions : {skill.actionNb}</p>
         <div className="flex justify-end">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
-            Détails
-          </button>
+          <Link to={`/skills/${skill.id}`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+              Détails
+            </button>
+          </Link>
         </div>
       </div>
     </div>
