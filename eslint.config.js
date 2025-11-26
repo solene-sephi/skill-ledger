@@ -33,6 +33,7 @@ export default defineConfig([
     rules: {
       ...promise.configs.recommended.rules,
       ...cssModules.configs.recommended.rules,
+      "@typescript-eslint/only-throw-error": "off",
     },
     languageOptions: {
       ecmaVersion: 2020,
