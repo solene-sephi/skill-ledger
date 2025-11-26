@@ -1,3 +1,7 @@
+import { useParams } from "react-router";
+
 export default function SkillDetail() {
-  return <h2>SkillDetail</h2>;
+  const { id } = useParams();
+
+  return <h2>{id}</h2>;
 }
