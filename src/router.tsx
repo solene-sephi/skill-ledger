@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Dashboard },
       { path: "add", Component: AddSkill },
-      { path: "detail", Component: SkillDetail },
+      { path: "skills/:id", Component: SkillDetail },
     ],
   },
 ]);
