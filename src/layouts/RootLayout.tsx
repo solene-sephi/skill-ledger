@@ -2,9 +2,13 @@ import { Outlet } from "react-router";
 
 export default function RootLayout() {
   return (
-    <div className="min-h-screen bg-gray-200 px-4 pt-4 pb-8">
-      <h1>Skill Ledger</h1>
-      <Outlet />
-    </div>
+    <>
+      <header className="px-4 py-6 sm:px-6 border-b border-gray">
+        <h1 className="text-3xl font-bold font-ubuntu">Skill Ledger</h1>
+      </header>
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+    </>
   );
 }
