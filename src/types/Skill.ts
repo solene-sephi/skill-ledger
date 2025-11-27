@@ -1,6 +1,7 @@
 export interface Skill {
   id: number;
   name: string;
-  type: string;
   actionNb: number;
+  tags: string[];
+  recentProgress: string;
 }
