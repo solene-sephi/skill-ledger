@@ -11,7 +11,7 @@ export default function Dashboard() {
   return (
     <div className="grid min-h-screen gap-0 lg:grid-cols-2">
       <section className="bg-white h-full">
-        <div className="mx-4 my-6 border-b border-gray pb-6 md:mx-12">
+        <div className="mx-4 my-6 border-b border-grey-500 pb-6 md:mx-12">
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="flex flex-col gap-1">
               <p className="text-sm text-slate-500">Nb total de compétences</p>
@@ -63,13 +63,13 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="h-full border-l border-grey bg-beige p-8 space-y-6">
+      <section className="h-full border-l border-grey-500 bg-beige p-8 space-y-6">
         <h2 className="font-ubuntu text-2xl font-black">Ajout rapide</h2>
 
         <div className="bg-white p-4">
           <p className="text-sm">Earnings by Referral</p>
           <div className="mt-3 flex gap-2">
-            <span className="flex-1 rounded-none border border-grey px-3 py-2 text-xs">
+            <span className="flex-1 rounded-none border border-grey-500 px-3 py-2 text-xs">
               https://skill-ledger/ref123
             </span>
           </div>
