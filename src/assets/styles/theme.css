@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Font */
+  --font-ubuntu: "Ubuntu Condensed", sans-serif;
+  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Colors */
+  --color-*: initial;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-beige: #f2f0eb;
+  --color-grey: #e4e4e7;
+  --color-gray: #e4e4e7;
+  --color-orange-500: #ef8a52;
+  --color-orange-600: #e56f2d;
+  --color-green-500: #85b09a;
+  --color-green-400: #99bdaa;
+}
