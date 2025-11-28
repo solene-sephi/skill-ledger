@@ -24,9 +24,11 @@ export default function SkillCard({ skill }: SkillCardProps) {
           </span>
         ))}
       </div>
-      <Link to={`/skills/${skill.id}`} className="flex justify-end">
-        <Button variant="secondary">Détails</Button>
-      </Link>
+      <div className="flex justify-end">
+        <Link to={`/skills/${skill.id}`}>
+          <Button variant="secondary">Détails</Button>
+        </Link>
+      </div>
     </div>
   );
 }

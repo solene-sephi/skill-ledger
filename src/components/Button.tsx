@@ -1,10 +1,8 @@
 type ButtonVariant = "primary" | "secondary";
-type ButtonType = "button" | "submit" | "reset";
 
-interface ButtonProps extends React.PropsWithChildren {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
-  type?: ButtonType;
-}
+};
 
 const colorsClasses: Record<ButtonVariant, string> = {
   primary: "bg-orange-500 text-white hover:bg-orange-600",
@@ -14,12 +12,18 @@ const colorsClasses: Record<ButtonVariant, string> = {
 export default function Button({
   variant = "primary",
   type = "button",
+  className = "",
   children,
+  ...props
 }: ButtonProps) {
   const classes = colorsClasses[variant];
 
   return (
-    <button type={type} className={`px-4 py-2 text-sm ${classes}`}>
+    <button
+      type={type}
+      className={`px-4 py-2 text-sm hover:cursor-pointer ${classes} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );
