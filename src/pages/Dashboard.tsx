@@ -1,12 +1,21 @@
-import { Link } from "react-router";
 import SkillCard from "../components/SkillCard";
 import { getAllSkills } from "../services/skills";
+import AddSkillForm from "../components/AddSkillForm";
+import { useState } from "react";
+import type { Skill } from "../types/Skill";
 
 export default function Dashboard() {
-  const skills = getAllSkills();
-  const totalSkills = skills.length;
-  const totalActions = skills.reduce((sum, { actionNb }) => sum + actionNb, 0);
+  const [skillsList, setSkillsList] = useState<Skill[]>(() => getAllSkills());
+  const totalSkills = skillsList.length;
+  const totalActions = skillsList.reduce(
+    (sum, { actionNb }) => sum + actionNb,
+    0
+  );
   const hasSkills = totalSkills > 0;
+
+  function handleAddSkill(skill: Skill) {
+    setSkillsList((prev) => [...prev, skill]);
+  }
 
   return (
     <div className="grid min-h-screen gap-0 lg:grid-cols-2">
@@ -38,19 +47,12 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="mx-4 my-6 md:mx-12">
-          <div className="grid sm:grid-cols-2 my-6 gap-4">
-            <h2 className="font-ubuntu text-2xl font-black">Compétences</h2>
-            <Link to="/add" className="sm:ml-auto">
-              <button className="bg-orange-500 px-4 py-2 text-sm text-white hover:bg-orange-600">
-                Ajouter une compétence
-              </button>
-            </Link>
-          </div>
+        <div className="mx-4 my-6 md:mx-12 space-y-6">
+          <h2 className="font-ubuntu text-2xl font-black">Compétences</h2>
 
           {hasSkills ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-5">
-              {skills.map((skill) => (
+              {skillsList.map((skill) => (
                 <SkillCard key={skill.id} skill={skill} />
               ))}
             </div>
@@ -64,15 +66,11 @@ export default function Dashboard() {
       </section>
 
       <section className="h-full border-l border-grey-500 bg-beige p-8 space-y-6">
-        <h2 className="font-ubuntu text-2xl font-black">Ajout rapide</h2>
-
-        <div className="bg-white p-4">
-          <p className="text-sm">Earnings by Referral</p>
-          <div className="mt-3 flex gap-2">
-            <span className="flex-1 rounded-none border border-grey-500 px-3 py-2 text-xs">
-              https://skill-ledger/ref123
-            </span>
-          </div>
+        <div className="bg-white p-4 space-y-6">
+          <h2 className="font-ubuntu text-2xl font-black">
+            Ajouter une compétence
+          </h2>
+          <AddSkillForm onAdd={handleAddSkill} />
         </div>
       </section>
     </div>

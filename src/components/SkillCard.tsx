@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import type { Skill } from "../types/Skill";
+import Button from "./Button";
 
 interface SkillCardProps {
   skill: Skill;
@@ -23,13 +24,9 @@ export default function SkillCard({ skill }: SkillCardProps) {
           </span>
         ))}
       </div>
-      <div className="flex justify-end">
-        <Link to={`/skills/${skill.id}`}>
-          <button className=" bg-black px-4 py-2 text-sm text-white hover:bg-black/85">
-            Détails
-          </button>
-        </Link>
-      </div>
+      <Link to={`/skills/${skill.id}`} className="flex justify-end">
+        <Button variant="secondary">Détails</Button>
+      </Link>
     </div>
   );
 }
