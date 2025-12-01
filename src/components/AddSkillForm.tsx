@@ -6,31 +6,47 @@ interface AddSkillFormProps {
   onAdd: (skill: Skill) => void;
 }
 
-export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
-  // Génère un skill vide avec un nouvel id à chaque fois
-  const makeEmptySkill = (): Skill => ({
+function validateSkillForm(skill: Skill): string | null {
+  if (!skill.name.trim()) {
+    return "Le nom est obligatoire";
+  }
+  return null;
+}
+
+function makeEmptySkill(): Skill {
+  return {
     id: crypto.randomUUID(),
     name: "",
     actionNb: 0,
     tags: [],
     recentProgress: "",
-  });
+  };
+}
+
+export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
   const [newSkill, setNewSkill] = useState<Skill>(() => makeEmptySkill());
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
+  const validationError = validateSkillForm(newSkill);
+  const isFormValid = !validationError;
+  const submitButtonDisabled = !isFormValid;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(""); // Réinitialisation de l'erreur
+    setError(""); // Error reset
 
-    if (!newSkill.name.trim()) {
-      setError("Le nom est obligatoire");
+    // Checking the validity of the form one last time and retrieve error message
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
+    // Add the new skill
     onAdd(newSkill);
 
+    // Empty all form fiels
     setNewSkill(makeEmptySkill());
+    setTagInput("");
   }
 
   function handleNameChange(e: ChangeEvent<HTMLInputElement>) {
@@ -44,21 +60,29 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
     setTagInput(e.target.value);
   }
 
-  function handleAddTag() {
-    // Vérifier si le champ est une châine de caractères vide
-    if (!tagInput.trim()) {
-      return;
+  function handleTagInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevents form submission via Enter
+      handleAddTag();
     }
+  }
+
+  function handleAddTag() {
+    const value = tagInput.trim();
+
+    // Check if the field is an empty string
+    if (!value) return;
 
     setNewSkill((prev) => {
-      // Vérifier si la valeur n'existe pas déjà
-      if (prev.tags.includes(tagInput)) {
+      // Check if the value does not already exist
+      const lowerTags = prev.tags.map((t) => t.toLowerCase());
+      if (lowerTags.includes(value.toLowerCase())) {
         return prev;
       }
 
       return {
         ...prev,
-        tags: [...prev.tags, tagInput],
+        tags: [...prev.tags, value],
       };
     });
     setTagInput("");
@@ -75,13 +99,13 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
+    <form onSubmit={handleSubmit} className="form-base">
       {/* Name input */}
-      <label className="block text-sm font-medium">
+      <label className="form-label">
         Nom <span className="text-red-600">*</span>
         <input
           name="name"
-          className="border border-grey-500 font-normal block w-full px-3 py-2.5 mt-2"
+          className="input-base field-spacing"
           value={newSkill.name}
           onChange={handleNameChange}
           required
@@ -89,27 +113,33 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
       </label>
 
       {/* Tags input */}
-      <label className="block text-sm font-medium mt-6">
+      <label className="form-label">
         Tags
-        <div className="mt-2 flex gap-2">
+        <div className="flex gap-2 field-spacing">
           <input
             name="tag"
-            className="border border-grey-500 font-normal block w-full px-3 py-2.5"
+            className="input-base"
             value={tagInput}
             onChange={handleTagInputChange}
+            onKeyDown={handleTagInputKeyDown}
             placeholder="Ajouter un tag puis cliquer sur +"
           />
-          <Button type="button" variant="secondary" onClick={handleAddTag}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleAddTag}
+            aria-label="Ajouter un tag"
+          >
             +
           </Button>
         </div>
       </label>
 
       {/* Tags list */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {newSkill.tags.map((tag) => (
           <span
-            key={crypto.randomUUID()}
+            key={tag}
             className="px-2 py-1 bg-green-400 text-black rounded-full text-sm"
           >
             {tag}
@@ -117,6 +147,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
               type="button"
               className="ml-2 hover:cursor-pointer"
               onClick={() => handleRemoveTag(tag)}
+              aria-label={`Supprimer le tag ${tag}`}
             >
               ×
             </button>
@@ -126,7 +157,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
 
       {/* Submit button */}
       <div className="flex justify-end">
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={submitButtonDisabled}>
           Ajouter une compétence
         </Button>
       </div>
