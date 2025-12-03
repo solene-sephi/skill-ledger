@@ -1,4 +1,4 @@
-type ButtonVariant = "primary" | "secondary";
+type ButtonVariant = "primary" | "tertiary";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -6,7 +6,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const colorsClasses: Record<ButtonVariant, string> = {
   primary: "bg-orange-500 text-white hover:bg-orange-600",
-  secondary: "bg-black text-white hover:bg-black/85",
+  tertiary: "bg-grey-900 text-white hover:bg-black",
 };
 
 export default function Button({
