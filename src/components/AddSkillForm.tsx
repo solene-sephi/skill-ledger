@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import Button from "./Button";
 import type { Skill } from "../types/Skill";
+import SkillTagList from "./SkillTagList";
 
 interface AddSkillFormProps {
   onAdd: (skill: Skill) => void;
@@ -126,7 +127,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
           />
           <Button
             type="button"
-            variant="secondary"
+            variant="tertiary"
             onClick={handleAddTag}
             aria-label="Ajouter un tag"
           >
@@ -136,25 +137,11 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
       </label>
 
       {/* Tags list */}
-      <div className="flex flex-wrap gap-2">
-        {newSkill.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-2 py-1 bg-green-400 text-black rounded-full text-sm"
-          >
-            {tag}
-            <button
-              type="button"
-              className="ml-2 hover:cursor-pointer"
-              onClick={() => handleRemoveTag(tag)}
-              aria-label={`Supprimer le tag ${tag}`}
-            >
-              ×
-            </button>
-          </span>
-        ))}
-      </div>
-
+      <SkillTagList
+        tags={newSkill.tags}
+        isRemovable
+        onRemove={handleRemoveTag}
+      ></SkillTagList>
       {/* Submit button */}
       <div className="flex justify-end">
         <Button variant="primary" type="submit" disabled={submitButtonDisabled}>

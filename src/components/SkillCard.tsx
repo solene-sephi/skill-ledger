@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import type { Skill } from "../types/Skill";
 import Button from "./Button";
+import SkillTagList from "./SkillTagList";
 
 interface SkillCardProps {
   skill: Skill;
@@ -14,19 +15,12 @@ export default function SkillCard({ skill }: SkillCardProps) {
         {skill.actionNb} actions
         <span className="text-black text-xs">{skill.recentProgress}</span>
       </p>
-      <div className="flex flex-wrap gap-2">
-        {skill.tags.map((tag) => (
-          <span
-            key={crypto.randomUUID()}
-            className="px-2 py-1 bg-green-400 text-black rounded-full text-xs"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+
+      <SkillTagList tags={skill.tags} />
+
       <div className="flex justify-end">
         <Link to={`/skills/${skill.id}`}>
-          <Button variant="secondary">Détails</Button>
+          <Button variant="tertiary">Détails</Button>
         </Link>
       </div>
     </div>
