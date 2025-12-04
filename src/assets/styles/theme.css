@@ -16,7 +16,11 @@
   --color-grey-900: #444445;
   --color-orange-500: #ef8a52;
   --color-orange-600: #e56f2d;
-  --color-green-500: #85b09a;
-  --color-green-400: #99bdaa;
+  --color-green-900: #4f9268;
+  --color-green-500: #7ab892;
+  --color-green-400: #88bf9d;
   --color-red-600: #ce2029;
+  /* Accents */
+  --color-lavender-500: #8d6a9f;
+  --color-berry-500: #b8336a;
 }
