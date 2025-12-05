@@ -6,16 +6,16 @@ import { validateSkillName } from "../../services/skillValidation";
 import Button from "../ui/Button";
 
 interface SkillNameInlineEditorProps {
-  skill: Skill;
+  skillName: string;
   onSaveName: (name: string) => void;
 }
 
 export default function SkillNameInlineEditor({
-  skill,
+  skillName,
   onSaveName,
 }: SkillNameInlineEditorProps) {
   const [isEditingName, setIsEditingName] = useState(false);
-  const [nameDraft, setNameDraft] = useState(skill.name);
+  const [nameDraft, setNameDraft] = useState(skillName);
   const validationError = validateSkillName(nameDraft); // Derived validation so we can disable the submit button and refresh errors live; handleSubmit still rechecks as a last guard.
   const displayError = Boolean(validationError);
 
@@ -49,7 +49,7 @@ export default function SkillNameInlineEditor({
       </Button>
       <div className="flex-1 min-w-0">
         <h2 className="input-readonly-display text-3xl font-bold text-grey-900 wrap-break-word">
-          {skill.name}
+          {skillName}
         </h2>
       </div>
     </div>
