@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import Button from "./Button";
-import type { Skill } from "../types/Skill";
+import Button from "../ui/Button";
+import type { Skill } from "../../types/Skill";
 import SkillTagList from "./SkillTagList";
 
 interface AddSkillFormProps {
