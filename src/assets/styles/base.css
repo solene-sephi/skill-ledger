@@ -4,4 +4,10 @@
     background: var(--color-white);
     color: var(--color-black);
   }
+
+  button:disabled {
+    background-color: var(--color-grey-500);
+    color: var(--color-white);
+    cursor: not-allowed;
+  }
 }

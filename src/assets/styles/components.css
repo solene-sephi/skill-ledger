@@ -1,10 +1,4 @@
 @layer components {
-  button:disabled {
-    background-color: var(--color-grey-500);
-    color: var(--color-white);
-    cursor: not-allowed;
-  }
-
   .form-base {
     @apply space-y-4;
   }
