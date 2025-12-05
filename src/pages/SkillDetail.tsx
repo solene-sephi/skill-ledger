@@ -1,7 +1,6 @@
 import { useLoaderData } from "react-router";
 import type { Skill } from "../types/Skill";
 import {
-  RiPencilFill,
   RiBookOpenLine,
   RiArticleLine,
   RiMessage2Line,
@@ -11,28 +10,27 @@ import {
 import SkillTagList from "../components/skill/SkillTagList";
 import Button from "../components/ui/Button";
 import MilestoneProgress from "../components/MilestoneProgress";
+import SkillNameInlineEditor from "../components/skill/SkillNameInlineEditor";
+import { useState } from "react";
 
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
+  const [newSkill, setNewSkill] = useState(skill);
+
+  function handleValidateNewName(newName: string) {
+    setNewSkill((prev) => ({ ...prev, name: newName }));
+  }
 
   return (
     <div className="min-h-screen bg-beige py-6">
       <div className="container mx-auto max-w-6xl space-y-6 px-4">
         {/* Name + tags block */}
-        <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <h2 className="text-3xl font-bold text-grey-900">{skill.name}</h2>
-              <button
-                type="button"
-                className="p-2 border border-grey-500 text-grey-900 hover:bg-grey-100"
-                aria-label="Éditer le nom et les tags de la compétence"
-              >
-                <RiPencilFill className="size-4" />
-              </button>
-            </div>
-            <SkillTagList tags={skill.tags} />
-          </div>
+        <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-3">
+          <SkillNameInlineEditor
+            skill={newSkill}
+            onSaveName={handleValidateNewName}
+          />
+          <SkillTagList tags={newSkill.tags} />
         </div>
 
         {/* Progression block */}
@@ -52,7 +50,7 @@ export default function SkillDetail() {
                       Actions complétées
                     </p>
                     <p className="text-xl font-bold text-grey-900">
-                      {skill.actionNb}
+                      {newSkill.actionNb}
                     </p>
                   </div>
                 </div>
