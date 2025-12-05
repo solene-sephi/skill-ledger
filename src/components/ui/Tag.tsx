@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import Button from "./Button";
 
 type TagVariant =
   | "primaryOutline"
