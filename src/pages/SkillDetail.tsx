@@ -8,8 +8,8 @@ import {
   RiQuestionLine,
   RiArrowRightUpLine,
 } from "react-icons/ri";
-import SkillTagList from "../components/SkillTagList";
-import Button from "../components/Button";
+import SkillTagList from "../components/skill/SkillTagList";
+import Button from "../components/ui/Button";
 import MilestoneProgress from "../components/MilestoneProgress";
 
 export default function SkillDetail() {
@@ -18,18 +18,24 @@ export default function SkillDetail() {
   return (
     <div className="min-h-screen bg-beige py-6">
       <div className="container mx-auto max-w-6xl space-y-6 px-4">
-        {/* Header */}
+        {/* Name + tags block */}
         <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-grey-900">{skill.name}</h2>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <h2 className="text-3xl font-bold text-grey-900">{skill.name}</h2>
+              <button
+                type="button"
+                className="p-2 border border-grey-500 text-grey-900 hover:bg-grey-100"
+                aria-label="Éditer le nom et les tags de la compétence"
+              >
+                <RiPencilFill className="size-4" />
+              </button>
+            </div>
             <SkillTagList tags={skill.tags} />
           </div>
-          <Button variant="tertiary" className="inline-flex items-center gap-2">
-            <RiPencilFill className="size-4" />
-            Éditer
-          </Button>
         </div>
 
+        {/* Progression block */}
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8 space-y-6">
             <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-5">
@@ -105,6 +111,7 @@ export default function SkillDetail() {
             </div>
           </div>
 
+          {/* History block */}
           <div className="lg:col-span-4">
             <div className="bg-white border border-grey-500 border-t-4 border-t-green-900 p-5 space-y-3 h-full">
               <div className="flex items-center justify-between">

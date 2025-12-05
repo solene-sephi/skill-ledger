@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import type { Skill } from "../types/Skill";
-import Button from "./Button";
+import type { Skill } from "../../types/Skill";
+import Button from "../ui/Button";
 import SkillTagList from "./SkillTagList";
 
 interface SkillCardProps {

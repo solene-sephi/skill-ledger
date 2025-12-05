@@ -1,4 +1,4 @@
-import Tag, { type TagProps } from "./Tag";
+import Tag, { type TagProps } from "../ui/Tag";
 
 type SkillTagListProps =
   // Tag props that can be forwarded to every tag in the list
