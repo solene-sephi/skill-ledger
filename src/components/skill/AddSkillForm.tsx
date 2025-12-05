@@ -2,16 +2,14 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import Button from "../ui/Button";
 import type { Skill } from "../../types/Skill";
 import SkillTagList from "./SkillTagList";
+import { validateSkillName } from "../../services/skillValidation";
 
 interface AddSkillFormProps {
   onAdd: (skill: Skill) => void;
 }
 
 function validateSkillForm(skill: Skill): string | null {
-  if (!skill.name.trim()) {
-    return "Le nom est obligatoire";
-  }
-  return null;
+  return validateSkillName(skill.name);
 }
 
 function makeEmptySkill(): Skill {
@@ -27,18 +25,15 @@ function makeEmptySkill(): Skill {
 export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
   const [newSkill, setNewSkill] = useState<Skill>(() => makeEmptySkill());
   const [tagInput, setTagInput] = useState("");
-  const [error, setError] = useState("");
-  const validationError = validateSkillForm(newSkill);
-  const isFormValid = !validationError;
-  const submitButtonDisabled = !isFormValid;
+  const [touchedName, setTouchedName] = useState(false);
+  const validationError = validateSkillForm(newSkill); // Derived validation so we can disable the submit button and refresh errors live; handleSubmit still rechecks as a last guard.
+  const displayError = touchedName && Boolean(validationError);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(""); // Error reset
 
-    // Checking the validity of the form one last time and retrieve error message
+    // Checking the validity of the form one last time
     if (validationError) {
-      setError(validationError);
       return;
     }
 
@@ -51,6 +46,8 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
   }
 
   function handleNameChange(e: ChangeEvent<HTMLInputElement>) {
+    setTouchedName(true);
+
     setNewSkill((prev) => ({
       ...prev,
       name: e.target.value,
@@ -144,15 +141,15 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
       ></SkillTagList>
       {/* Submit button */}
       <div className="flex justify-end">
-        <Button variant="primary" type="submit" disabled={submitButtonDisabled}>
+        <Button variant="primary" type="submit" disabled={displayError}>
           Ajouter une compétence
         </Button>
       </div>
 
       {/* Error display */}
-      {error && (
+      {displayError && (
         <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
-          {error}
+          {validationError}
         </p>
       )}
     </form>

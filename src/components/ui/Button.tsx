@@ -21,7 +21,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`px-4 py-2 text-sm hover:cursor-pointer ${classes} ${className}`}
+      className={`px-4 py-2 text-sm hover:cursor-pointer ${classes} ${className} disabled:bg-grey-500 disabled:text-white disabled:cursor-not-allowed disabled:hover:bg-grey-500 disabled:hover:text-white`}
       {...props}
     >
       {children}
