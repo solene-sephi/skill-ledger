@@ -1,29 +1,10 @@
 @import "./assets/styles/theme.css";
 
-body {
-  font-family: var(--font-inter);
-  background: var(--color-white);
-  color: var(--color-black);
-}
+/* Global element styles (html/body/reset/typography) that set the foundation */
+@import "./assets/styles/base.css";
 
-button:disabled {
-  background-color: var(--color-grey-500);
-  color: var(--color-white);
-  cursor: not-allowed;
-}
+/* Tiny utility helpers (shared sizing/padding/etc.) to be reused inside component classes */
+@import "./assets/styles/utility.css";
 
-.form-base {
-  @apply space-y-4;
-}
-
-.form-label {
-  @apply block text-sm font-medium;
-}
-
-.form-label .field-spacing {
-  @apply mt-2;
-}
-
-.input-base {
-  @apply border border-grey-500 font-normal block w-full px-3 py-2.5;
-}
+/* Reusable component-level classes (form patterns, inputs, buttons) that sit above utilities */
+@import "./assets/styles/components.css";

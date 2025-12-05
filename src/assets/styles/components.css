@@ -1,0 +1,28 @@
+@layer components {
+  button:disabled {
+    background-color: var(--color-grey-500);
+    color: var(--color-white);
+    cursor: not-allowed;
+  }
+
+  .form-base {
+    @apply space-y-4;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium;
+  }
+
+  .form-label .field-spacing {
+    @apply mt-2;
+  }
+
+  .input-base {
+    @apply form-input-sizing border-grey-500;
+  }
+
+  /* Gabarit d'input pour que l'élément ait la même disposition qu'un input (même hauteur/padding, bordure invisible) */
+  .input-readonly-display {
+    @apply form-input-sizing border-transparent;
+  }
+}

@@ -1,0 +1,16 @@
+@utility form-input-sizing {
+  /* block */
+  display: block;
+  /* w-full */
+  width: 100%;
+  /* px-3 */
+  padding-inline: calc(var(--spacing) * 3) /* 0.75rem = 12px */;
+  /* py-2.5 */
+  padding-block: calc(var(--spacing) * 2.5) /* 0.625rem = 10px */;
+  /* border */
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  /* font-normal */
+  --tw-font-weight: var(--font-weight-normal) /* 400 */;
+  font-weight: var(--font-weight-normal) /* 400 */;
+}
