@@ -1,17 +1,19 @@
 import type { HTMLAttributes } from "react";
-import Button from "./Button";
+import type { OnRemoveTag } from "../../types/Skill";
 
-type TagVariant =
+export type TagVariant =
   | "primaryOutline"
   | "secondary"
   | "secondaryOutline"
   | "tertiaryOutline";
 
+export type TagSize = "sm" | "md";
+
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   label: string;
   variant?: TagVariant;
-  isRemovable?: boolean;
-  onRemove?: (label: string) => void;
+  size?: TagSize;
+  onRemove?: OnRemoveTag;
 }
 
 const colorsClasses: Record<TagVariant, string> = {
@@ -21,29 +23,25 @@ const colorsClasses: Record<TagVariant, string> = {
   tertiaryOutline: "text-black bg-white border-2 border-grey-900",
 };
 
+const sizeClasses: Record<NonNullable<TagProps["size"]>, string> = {
+  sm: "text-xs px-2 py-0.5",
+  md: "text-sm px-3 py-1",
+};
+
 export default function Tag({
   label,
   variant = "secondary",
-  isRemovable = false,
+  size = "sm",
   onRemove,
   className = "",
   ...props
 }: TagProps) {
   const classes = colorsClasses[variant];
-
-  // Guard: removable tags must receive an onRemove handler
-  if (isRemovable && !onRemove) {
-    throw new Error("Tag : isRemovable=true nécessite la prop onRemove.");
-  }
-  const canRemove = isRemovable && typeof onRemove === "function";
-
+  const sizing = sizeClasses[size];
   return (
-    <span
-      {...props}
-      className={`px-2 py-1 rounded-md text-xs ${className} ${classes}`}
-    >
+    <span {...props} className={`rounded-md ${sizing} ${className} ${classes}`}>
       {label}
-      {canRemove && (
+      {onRemove && (
         <button
           type="button"
           className="ml-2 hover:cursor-pointer"

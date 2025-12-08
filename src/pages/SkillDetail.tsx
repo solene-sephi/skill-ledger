@@ -7,15 +7,26 @@ import {
   RiQuestionLine,
   RiArrowRightUpLine,
 } from "react-icons/ri";
-import SkillTagList from "../components/skill/SkillTagList";
 import Button from "../components/ui/Button";
 import MilestoneProgress from "../components/MilestoneProgress";
 import SkillNameInlineEditor from "../components/skill/SkillNameInlineEditor";
 import { useState } from "react";
+import SkillTagsInlineEditor from "../components/skill/SkillTagsInlineEditor";
+import { useTagInput } from "../hooks/useTagInput";
 
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
   const [newSkill, setNewSkill] = useState(skill);
+  const [
+    tags,
+    tagInput,
+    isInvalid,
+    errorMessage,
+    handleTagInputChange,
+    handleTagInputKeyDown,
+    handleAddTag,
+    handleRemoveTag,
+  ] = useTagInput(newSkill.tags);
 
   function handleValidateNewName(newName: string) {
     setNewSkill((prev) => ({ ...prev, name: newName }));
@@ -27,10 +38,21 @@ export default function SkillDetail() {
         {/* Name + tags block */}
         <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-3">
           <SkillNameInlineEditor
-            skill={newSkill}
+            skillName={newSkill.name}
             onSaveName={handleValidateNewName}
           />
-          <SkillTagList tags={newSkill.tags} />
+          <div className="border-t border-grey-500 space-y-3 pt-4">
+            <SkillTagsInlineEditor
+              tags={tags}
+              tagInput={tagInput}
+              isInvalid={isInvalid}
+              errorMessage={errorMessage}
+              onTagInputChange={handleTagInputChange}
+              onTagInputKeyDown={handleTagInputKeyDown}
+              onAddTag={handleAddTag}
+              onRemoveTag={handleRemoveTag}
+            ></SkillTagsInlineEditor>
+          </div>
         </div>
 
         {/* Progression block */}

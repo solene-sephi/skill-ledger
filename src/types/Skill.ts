@@ -5,3 +5,7 @@ export interface Skill {
   tags: string[];
   recentProgress: string;
 }
+
+export type OnRemoveTag = (tag: string) => void;
+
+export type SkillTag = string;

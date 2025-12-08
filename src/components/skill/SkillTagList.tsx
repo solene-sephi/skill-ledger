@@ -1,15 +1,19 @@
-import Tag, { type TagProps } from "../ui/Tag";
+import type { OnRemoveTag, SkillTag } from "../../types/Skill";
+import type { TagSize, TagVariant } from "../ui/Tag";
+import Tag from "../ui/Tag";
 
-type SkillTagListProps =
-  // Tag props that can be forwarded to every tag in the list
-  Pick<TagProps, "variant" | "isRemovable" | "onRemove"> & {
-    tags: string[];
-  };
+interface SkillTagListProps {
+  tags: SkillTag[];
+  removable?: boolean;
+  onRemove?: OnRemoveTag;
+  variant?: TagVariant;
+  size?: TagSize;
+}
 
 export default function SkillTagList({
   tags,
   variant,
-  isRemovable,
+  size,
   onRemove,
 }: SkillTagListProps) {
   return (
@@ -17,9 +21,9 @@ export default function SkillTagList({
       {tags.map((tag) => (
         <Tag
           label={tag}
-          key={crypto.randomUUID()}
+          key={tag}
           variant={variant}
-          isRemovable={isRemovable}
+          size={size}
           onRemove={onRemove}
         ></Tag>
       ))}

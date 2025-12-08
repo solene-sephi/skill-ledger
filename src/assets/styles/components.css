@@ -12,11 +12,11 @@
   }
 
   .input-base {
-    @apply form-input-sizing border-grey-500;
+    @apply input-size border-grey-500 focus:input-focus focus-within:input-focus focus-visible:input-focus;
   }
 
   /* Gabarit d'input pour que l'élément ait la même disposition qu'un input (même hauteur/padding, bordure invisible) */
   .input-readonly-display {
-    @apply form-input-sizing border-transparent;
+    @apply input-size border-transparent;
   }
 }
