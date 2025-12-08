@@ -1,9 +1,9 @@
 import { RiPencilFill } from "react-icons/ri";
-import type { Skill } from "../../types/Skill";
-import { useState, type ChangeEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { FaCheck } from "react-icons/fa";
 import { validateSkillName } from "../../services/skillValidation";
 import Button from "../ui/Button";
+import { useTextInput } from "../../hooks/useTextInput";
 
 interface SkillNameInlineEditorProps {
   skillName: string;
@@ -15,26 +15,24 @@ export default function SkillNameInlineEditor({
   onSaveName,
 }: SkillNameInlineEditorProps) {
   const [isEditingName, setIsEditingName] = useState(false);
-  const [nameDraft, setNameDraft] = useState(skillName);
-  const validationError = validateSkillName(nameDraft); // Derived validation so we can disable the submit button and refresh errors live; handleSubmit still rechecks as a last guard.
-  const displayError = Boolean(validationError);
+  const [
+    nameInputValue,
+    nameInputIsInvalid,
+    nameInputErrorMessage,
+    handleNameInputChange,
+  ] = useTextInput(skillName, validateSkillName);
 
   function handleEnterEditMode() {
     setIsEditingName(true);
   }
 
-  function handleSubmit() {
-    // Checking the validity of the form one last time
-    if (validationError) {
-      return;
-    }
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
-    onSaveName(nameDraft);
+    if (nameInputIsInvalid) return;
+
+    onSaveName(nameInputValue.trim());
     setIsEditingName(false);
-  }
-
-  function handleNameChange(e: ChangeEvent<HTMLInputElement>) {
-    setNameDraft(e.target.value);
   }
 
   const nameDisplay = (
@@ -60,9 +58,9 @@ export default function SkillNameInlineEditor({
       <Button
         variant="tertiaryOutline"
         size="square"
-        disabled={displayError}
+        disabled={nameInputIsInvalid}
         type="submit"
-        aria-label="Éditer le nom et les tags de la compétence"
+        aria-label="Éditer le nom de la compétence"
       >
         <FaCheck className="size-4" />
       </Button>
@@ -73,8 +71,8 @@ export default function SkillNameInlineEditor({
         name="skillName"
         id="skillName"
         className="input-base text-3xl font-bold text-grey-900"
-        value={nameDraft}
-        onChange={handleNameChange}
+        value={nameInputValue}
+        onChange={handleNameInputChange}
         required
       />
     </form>
@@ -84,9 +82,9 @@ export default function SkillNameInlineEditor({
     <>
       {isEditingName ? nameEdit : nameDisplay}
 
-      {displayError && (
+      {nameInputIsInvalid && (
         <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
-          {validationError}
+          {nameInputErrorMessage}
         </p>
       )}
     </>
