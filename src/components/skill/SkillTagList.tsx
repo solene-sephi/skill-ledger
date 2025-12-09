@@ -1,11 +1,11 @@
-import type { OnRemoveTag, SkillTag } from "../../types/Skill";
+import type { SkillTag } from "../../types/Skill";
 import type { TagSize, TagVariant } from "../ui/Tag";
 import Tag from "../ui/Tag";
 
 interface SkillTagListProps {
   tags: SkillTag[];
   removable?: boolean;
-  onRemove?: OnRemoveTag;
+  onRemove?: (tag: string) => void;
   variant?: TagVariant;
   size?: TagSize;
 }
