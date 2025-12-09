@@ -7,6 +7,7 @@ const skills: Skill[] = [
     actionNb: 7,
     tags: ["Frontend", "JavaScript", "ES2023"],
     recentProgress: "+1 cette semaine",
+    actions: [],
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ const skills: Skill[] = [
     actionNb: 12,
     tags: ["Collaboration", "Soft skill", "Feedback"],
     recentProgress: "+2 cette semaine",
+    actions: [],
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ const skills: Skill[] = [
     actionNb: 4,
     tags: ["Couture", "DIY", "Créativité"],
     recentProgress: "+1 ce mois",
+    actions: [],
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ const skills: Skill[] = [
     actionNb: 6,
     tags: ["Cuisine", "Pâtisserie", "Créativité"],
     recentProgress: "+2 cette semaine",
+    actions: [],
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ const skills: Skill[] = [
     actionNb: 8,
     tags: ["Organisation", "Product", "Collaboration"],
     recentProgress: "+2 ce mois",
+    actions: [],
   },
 ];
 

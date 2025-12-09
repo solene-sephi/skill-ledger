@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import Button from "../ui/Button";
 import SkillTagList from "./SkillTagList";
-import type { OnRemoveTag, SkillTag } from "../../types/Skill";
+import type { SkillTag } from "../../types/Skill";
 import type { ChangeEvent } from "react";
 
 interface SkillTagsInlineEditorProps {
@@ -12,7 +12,7 @@ interface SkillTagsInlineEditorProps {
   onTagInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onTagInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onAddTag: () => void;
-  onRemoveTag?: OnRemoveTag;
+  onRemoveTag?: (tag: string) => void;
   showLabel?: boolean;
   label?: string;
 }

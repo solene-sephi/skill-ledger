@@ -1,5 +1,4 @@
 import type { HTMLAttributes } from "react";
-import type { OnRemoveTag } from "../../types/Skill";
 
 export type TagVariant =
   | "primaryOutline"
@@ -13,7 +12,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   label: string;
   variant?: TagVariant;
   size?: TagSize;
-  onRemove?: OnRemoveTag;
+  onRemove?: (tag: string) => void;
 }
 
 const colorsClasses: Record<TagVariant, string> = {
