@@ -1,39 +1,18 @@
 import { useLoaderData } from "react-router";
-import type { Skill } from "../types/Skill";
+import { type Skill, type SkillTag } from "../types/Skill";
 import Button from "../components/ui/Button";
 import SkillNameInlineEditor from "../components/skill/SkillNameInlineEditor";
 import { useState } from "react";
 import SkillTagsInlineEditor from "../components/skill/SkillTagsInlineEditor";
-import { useTagInput } from "../hooks/useTagInput";
-import { useTextInput } from "../hooks/useTextInput";
-import { validateSkillName } from "../services/skillValidation";
 import SkillHistoryCard from "../components/skill/SkillHistoryCard";
 import SkillProgressCard from "../components/skill/SkillProgressCard";
 
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
   const [newSkill, setNewSkill] = useState(skill);
-  const [
-    tags,
-    tagInput,
-    tagsIsInvalid,
-    tagsErrorMessage,
-    handleTagInputChange,
-    handleTagInputKeyDown,
-    handleAddTag,
-    handleRemoveTag,
-  ] = useTagInput(newSkill.tags, handleUpdateTags);
-  const [
-    nameInputValue,
-    nameInputIsInvalid,
-    nameInputErrorMessage,
-    handleNameInputChange,
-    handleNameInputBlur,
-  ] = useTextInput(newSkill.name, validateSkillName);
 
-  function handleUpdateName() {
-    if (nameInputIsInvalid) return;
-    setNewSkill((prev) => ({ ...prev, name: nameInputValue.trim() }));
+  function handleUpdateName(nextName: string) {
+    setNewSkill((prev) => ({ ...prev, name: nextName }));
   }
 
   // Update the skill with the latest tags so saving will use up-to-date data.
@@ -47,23 +26,15 @@ export default function SkillDetail() {
         {/* Name + tags block */}
         <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-3">
           <SkillNameInlineEditor
-            name={nameInputValue}
-            isInvalid={nameInputIsInvalid}
-            errorMessage={nameInputErrorMessage}
-            onChange={handleNameInputChange}
-            onBlur={handleNameInputBlur}
-            onSubmit={handleUpdateName}
+            key={newSkill.id}
+            skillName={newSkill.name}
+            onSaveName={handleUpdateName}
           />
           <div className="border-t border-grey-500 space-y-3 pt-4">
             <SkillTagsInlineEditor
-              tags={tags}
-              tagInput={tagInput}
-              isInvalid={tagsIsInvalid}
-              errorMessage={tagsErrorMessage}
-              onTagInputChange={handleTagInputChange}
-              onTagInputKeyDown={handleTagInputKeyDown}
-              onAddTag={handleAddTag}
-              onRemoveTag={handleRemoveTag}
+              key={newSkill.id}
+              initialTags={newSkill.tags}
+              onTagsChange={handleUpdateTags}
             ></SkillTagsInlineEditor>
           </div>
         </div>

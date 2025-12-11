@@ -41,26 +41,22 @@ export function useTagInput(
       return;
     }
 
-    setTags((prev) => {
-      // Check if the value does not already exist
-      const lowerTags = prev.map((t) => t.toLowerCase());
-      if (lowerTags.includes(value.toLowerCase())) {
-        return prev;
-      }
+    const lowerTags = tags.map((t) => t.toLowerCase());
+    if (lowerTags.includes(value.toLowerCase())) {
+      return;
+    }
 
-      onTagsChange?.([...prev, value]);
-      return [...prev, value];
-    });
+    const nextTags = [...tags, value];
+    setTags(nextTags);
+    onTagsChange?.(nextTags);
 
     inputReset();
   }
 
   function handleRemoveTag(tagToRemove: string) {
-    setTags((prev) => {
-      const filteredTags = prev.filter((tag) => tag !== tagToRemove);
-      onTagsChange?.(filteredTags);
-      return filteredTags;
-    });
+    const filteredTags = tags.filter((tag) => tag !== tagToRemove);
+    setTags(filteredTags);
+    onTagsChange?.(filteredTags);
   }
 
   return [

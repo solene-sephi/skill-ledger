@@ -1,9 +1,8 @@
-import { type FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 import Button from "../ui/Button";
-import type { Skill } from "../../types/Skill";
+import type { Skill, SkillTag } from "../../types/Skill";
 import { validateSkillName } from "../../services/skillValidation";
 import SkillTagsInlineEditor from "./SkillTagsInlineEditor";
-import { useTagInput } from "../../hooks/useTagInput";
 import { useTextInput } from "../../hooks/useTextInput";
 
 interface AddSkillFormProps {
@@ -11,17 +10,8 @@ interface AddSkillFormProps {
 }
 
 export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
-  const [
-    tags,
-    tagInput,
-    tagInputIsInvalid,
-    tagInputErrorMessage,
-    handleTagInputChange,
-    handleTagInputKeyDown,
-    handleAddTag,
-    handleRemoveTag,
-    inputAndTagsReset,
-  ] = useTagInput([]);
+  const [tags, setTags] = useState<SkillTag[]>([]);
+  const [tagEditorKey, setTagEditorKey] = useState(0);
   const [
     nameInputValue,
     nameInputIsInvalid,
@@ -30,7 +20,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
     handleNameInputBlur,
     resetInput,
   ] = useTextInput("", validateSkillName);
-  const formIsInvalid = nameInputIsInvalid || tagInputIsInvalid;
+  const formIsInvalid = nameInputIsInvalid;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,13 +34,15 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
       tags,
       actionNb: 0,
       recentProgress: "",
+      actions: [],
     };
 
     onAdd(skillToAdd);
 
     // Empty all form fields
     resetInput();
-    inputAndTagsReset();
+    setTags([]);
+    setTagEditorKey((prev) => prev + 1);
   }
 
   return (
@@ -76,16 +68,11 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
 
       {/* Skill tags editor */}
       <SkillTagsInlineEditor
-        tags={tags}
-        tagInput={tagInput}
-        isInvalid={tagInputIsInvalid}
-        errorMessage={tagInputErrorMessage}
-        onTagInputChange={handleTagInputChange}
-        onTagInputKeyDown={handleTagInputKeyDown}
-        onAddTag={handleAddTag}
-        onRemoveTag={handleRemoveTag}
+        key={tagEditorKey}
+        initialTags={tags}
+        onTagsChange={setTags}
         showLabel
-      ></SkillTagsInlineEditor>
+      />
 
       {/* Submit button */}
       <div className="flex justify-end">
