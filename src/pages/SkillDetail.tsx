@@ -16,13 +16,13 @@ export default function SkillDetail() {
   const [
     tags,
     tagInput,
-    isInvalid,
-    errorMessage,
+    tagsIsInvalid,
+    tagsErrorMessage,
     handleTagInputChange,
     handleTagInputKeyDown,
     handleAddTag,
     handleRemoveTag,
-  ] = useTagInput(newSkill.tags);
+  ] = useTagInput(newSkill.tags, handleUpdateTags);
   const [
     nameInputValue,
     nameInputIsInvalid,
@@ -31,9 +31,14 @@ export default function SkillDetail() {
     handleNameInputBlur,
   ] = useTextInput(newSkill.name, validateSkillName);
 
-  function handleValidateNewName() {
+  function handleUpdateName() {
     if (nameInputIsInvalid) return;
     setNewSkill((prev) => ({ ...prev, name: nameInputValue.trim() }));
+  }
+
+  // Update the skill with the latest tags so saving will use up-to-date data.
+  function handleUpdateTags(nextTags: SkillTag[]) {
+    setNewSkill((prev) => ({ ...prev, tags: nextTags }));
   }
 
   return (
@@ -47,14 +52,14 @@ export default function SkillDetail() {
             errorMessage={nameInputErrorMessage}
             onChange={handleNameInputChange}
             onBlur={handleNameInputBlur}
-            onSubmit={handleValidateNewName}
+            onSubmit={handleUpdateName}
           />
           <div className="border-t border-grey-500 space-y-3 pt-4">
             <SkillTagsInlineEditor
               tags={tags}
               tagInput={tagInput}
-              isInvalid={isInvalid}
-              errorMessage={errorMessage}
+              isInvalid={tagsIsInvalid}
+              errorMessage={tagsErrorMessage}
               onTagInputChange={handleTagInputChange}
               onTagInputKeyDown={handleTagInputKeyDown}
               onAddTag={handleAddTag}

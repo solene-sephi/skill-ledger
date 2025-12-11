@@ -2,7 +2,11 @@ import { useState, type ChangeEvent } from "react";
 import type { SkillTag } from "../types/Skill";
 import { validateTag } from "../services/skillTagValidation";
 
-export function useTagInput(initialTags: SkillTag[] = []) {
+export function useTagInput(
+  initialTags: SkillTag[] = [],
+  onTagsChange?: (tags: SkillTag[]) => void // Use the callback when the parent needs tags synced immediately (no separate save).
+  // Skip it when the parent reads tags later (e.g., on main form submit).
+) {
   const [tags, setTags] = useState(initialTags);
   const [tagInput, setTagInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,6 +48,7 @@ export function useTagInput(initialTags: SkillTag[] = []) {
         return prev;
       }
 
+      onTagsChange?.([...prev, value]);
       return [...prev, value];
     });
 
@@ -53,6 +58,7 @@ export function useTagInput(initialTags: SkillTag[] = []) {
   function handleRemoveTag(tagToRemove: string) {
     setTags((prev) => {
       const filteredTags = prev.filter((tag) => tag !== tagToRemove);
+      onTagsChange?.(filteredTags);
       return filteredTags;
     });
   }

@@ -28,7 +28,6 @@ export default function SkillNameInlineEditor({
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (isInvalid) return;
 
     onSubmit();
     setIsEditingName(false);
