@@ -2,36 +2,44 @@ import { FaPlus } from "react-icons/fa";
 import Button from "../ui/Button";
 import SkillTagList from "./SkillTagList";
 import type { SkillTag } from "../../types/Skill";
-import type { ChangeEvent } from "react";
+import { useTagInput } from "../../hooks/useTagInput";
 
 interface SkillTagsInlineEditorProps {
-  tags: SkillTag[];
-  tagInput: string;
-  isInvalid: boolean;
-  errorMessage: string | null;
-  onTagInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onTagInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onAddTag: () => void;
+  initialTags: SkillTag[];
+  onTagsChange?: (tags: SkillTag[]) => void;
   onRemoveTag?: (tag: string) => void;
   showLabel?: boolean;
   label?: string;
 }
 
 export default function SkillTagsInlineEditor({
-  tags,
-  tagInput,
-  isInvalid,
-  errorMessage,
-  onTagInputChange,
-  onTagInputKeyDown,
-  onAddTag,
+  initialTags,
+  onTagsChange,
   onRemoveTag,
   showLabel = false,
   label = "Tags",
 }: SkillTagsInlineEditorProps) {
+  const [
+    tags,
+    tagInput,
+    isInvalid,
+    errorMessage,
+    handleTagInputChange,
+    handleTagInputKeyDown,
+    handleAddTag,
+    handleRemoveTag,
+  ] = useTagInput(initialTags, onTagsChange);
+
   return (
     <>
-      <SkillTagList tags={tags} size="md" onRemove={onRemoveTag} />
+      <SkillTagList
+        tags={tags}
+        size="md"
+        onRemove={(tag) => {
+          handleRemoveTag(tag);
+          onRemoveTag?.(tag);
+        }}
+      />
 
       <div className="flex flex-wrap items-center gap-2 field-spacing mt-4">
         <label
@@ -49,8 +57,8 @@ export default function SkillTagsInlineEditor({
           placeholder="Entrer un tag"
           aria-label={!showLabel ? label : undefined}
           value={tagInput}
-          onChange={onTagInputChange}
-          onKeyDown={onTagInputKeyDown}
+          onChange={handleTagInputChange}
+          onKeyDown={handleTagInputKeyDown}
         />
         <Button
           className="flex items-center justify-center"
@@ -58,7 +66,7 @@ export default function SkillTagsInlineEditor({
           size="square"
           variant="tertiary"
           aria-label="Ajouter un tag"
-          onClick={onAddTag}
+          onClick={handleAddTag}
         >
           <FaPlus className="size-4" />
         </Button>
