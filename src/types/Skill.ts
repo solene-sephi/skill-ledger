@@ -17,4 +17,5 @@ export interface SkillAction {
   typeId: SkillActionTypeId;
   date: Date;
   link?: string;
+  note?: string;
 }

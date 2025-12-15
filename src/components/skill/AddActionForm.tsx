@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import {
   validateSkillActionLink,
   validateSkillActionName,
+  validateSkillActionNote,
 } from "../../services/skillActionValidation";
 import { useTextInput } from "../../hooks/useTextInput";
 import {
@@ -38,9 +39,18 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
     handleLinkBlur,
     resetLinkInput,
   ] = useTextInput("", validateSkillActionLink);
+  const [
+    noteInputValue,
+    noteNormalizedValue,
+    noteIsInvalid,
+    noteErrorMessage,
+    handleNoteChange,
+    handleNoteBlur,
+    resetNoteInput,
+  ] = useTextInput("", validateSkillActionNote);
   const [selectedType, setSelectedType] =
     useState<SkillActionTypeId>(initialSelectedType);
-  const formIsInvalid = nameIsInvalid || linkIsInvalid;
+  const formIsInvalid = nameIsInvalid || linkIsInvalid || noteIsInvalid;
 
   function handleSelectTypeChange(e: ChangeEvent<HTMLSelectElement>) {
     // Checks whether the passed value exists
@@ -65,6 +75,7 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
       typeId: selectedType,
       date: new Date(), // now
       ...(linkNormalizedValue && { link: linkNormalizedValue }), // includes link property only if link value provided
+      ...(noteNormalizedValue && { note: noteNormalizedValue }),
     };
 
     onAdd(actionToAdd);
@@ -72,6 +83,7 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
     resetNameInput();
     resetSelectedType();
     resetLinkInput();
+    resetNoteInput();
   }
 
   return (
@@ -122,6 +134,21 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
       {linkIsInvalid && (
         <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
           {linkErrorMessage}
+        </p>
+      )}
+      <label className="form-label">
+        Note (optionnel)
+        <textarea
+          name="note"
+          className="input-base field-spacing w-full min-h-24"
+          value={noteInputValue}
+          onChange={handleNoteChange}
+          onBlur={handleNoteBlur}
+        />
+      </label>
+      {noteIsInvalid && (
+        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+          {noteErrorMessage}
         </p>
       )}
       <Button type="submit" className="self-start" disabled={formIsInvalid}>
