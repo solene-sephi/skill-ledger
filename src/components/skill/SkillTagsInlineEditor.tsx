@@ -44,7 +44,7 @@ export default function SkillTagsInlineEditor({
       <div className="flex flex-wrap items-center gap-2 field-spacing mt-4">
         <label
           htmlFor="skillTags"
-          className={`form-label w-full ${!showLabel && "sr-only"}`}
+          className={`form-label ${!showLabel && "sr-only"}`}
         >
           {label ? label : "Tags"}
         </label>
