@@ -11,6 +11,10 @@
     @apply mt-2;
   }
 
+  .form-label .field-spacing:not(.w-full) {
+    @apply ml-2;
+  }
+
   .input-base {
     @apply input-size border-grey-500 focus:input-focus focus-within:input-focus focus-visible:input-focus;
   }
