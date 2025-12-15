@@ -14,6 +14,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
   const [tagEditorKey, setTagEditorKey] = useState(0);
   const [
     nameInputValue,
+    nameNormalizedValue,
     nameInputIsInvalid,
     nameInputErrorMessage,
     handleNameInputChange,
@@ -30,7 +31,7 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
     // Build the skill object before calling onAdd; not using setNewSkill because it's async so newSkill won’t include the latest values yet
     const skillToAdd = {
       id: crypto.randomUUID(),
-      name: nameInputValue.trim(),
+      name: nameNormalizedValue,
       tags,
       actionNb: 0,
       recentProgress: "",
