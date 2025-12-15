@@ -15,3 +15,9 @@ export function validateSkillActionLink(link: string): string | null {
 
   return null;
 }
+
+export function validateSkillActionNote(note: string): string | null {
+  if (!note) return null; // optional field
+  if (note.length > 500) return "La note doit faire moins de 500 caractères";
+  return null;
+}
