@@ -1,3 +1,5 @@
+import type { SkillActionTypeId } from "../services/skillActionType";
+
 export interface Skill {
   id: number | string;
   name: string;
@@ -10,17 +12,8 @@ export interface Skill {
 export type SkillTag = string;
 
 export interface SkillAction {
-  id: number | string;
+  id: string;
   name: string;
-  type: SkillActionType;
+  typeId: SkillActionTypeId;
   date: Date;
 }
-
-export const SKILL_ACTION_TYPES = [
-  { value: "cours", label: "Cours" },
-  { value: "article", label: "Article" },
-  { value: "feedback", label: "Feedback" },
-  { value: "autre", label: "Autre" },
-] as const;
-
-export type SkillActionType = (typeof SKILL_ACTION_TYPES)[number]["value"];
