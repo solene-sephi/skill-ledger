@@ -22,6 +22,7 @@ const initialSelectedType = actionTypes[0].id;
 export default function AddActionForm({ onAdd }: AddActionFormProps) {
   const [
     nameInputValue,
+    nameNormalizedValue,
     nameIsInvalid,
     nameErrorMessage,
     handleNameChange,
@@ -30,6 +31,7 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
   ] = useTextInput("", validateSkillActionName);
   const [
     linkInputValue,
+    linkNormalizedValue,
     linkIsInvalid,
     linkErrorMessage,
     handleLinkChange,
@@ -59,10 +61,10 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
 
     const actionToAdd = {
       id: crypto.randomUUID(),
-      name: nameInputValue.trim(),
+      name: nameNormalizedValue,
       typeId: selectedType,
       date: new Date(), // now
-      ...(linkInputValue && { link: linkInputValue.trim() }), // includes link property only if link value provided
+      ...(linkNormalizedValue && { link: linkNormalizedValue }), // includes link property only if link value provided
     };
 
     onAdd(actionToAdd);
@@ -109,7 +111,8 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
       <label className="form-label">
         Lien (optionnel)
         <input
-          name="name"
+          name="link"
+          type="url"
           className="input-base field-spacing w-full"
           value={linkInputValue}
           onChange={handleLinkChange}

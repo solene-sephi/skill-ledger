@@ -12,6 +12,10 @@ export function useTagInput(
   const [errorMessage, setErrorMessage] = useState("");
   const isInvalid = Boolean(errorMessage);
 
+  function normalize(value: string) {
+    return value.trim();
+  }
+
   function inputReset() {
     setTagInput("");
   }
@@ -34,19 +38,19 @@ export function useTagInput(
   }
 
   function handleAddTag() {
-    const value = tagInput.trim();
-    const error = validateTag(value);
+    const normalized = normalize(tagInput);
+    const error = validateTag(normalized);
     if (error) {
       setErrorMessage(error);
       return;
     }
 
     const lowerTags = tags.map((t) => t.toLowerCase());
-    if (lowerTags.includes(value.toLowerCase())) {
+    if (lowerTags.includes(normalized.toLowerCase())) {
       return;
     }
 
-    const nextTags = [...tags, value];
+    const nextTags = [...tags, normalized];
     setTags(nextTags);
     onTagsChange?.(nextTags);
 

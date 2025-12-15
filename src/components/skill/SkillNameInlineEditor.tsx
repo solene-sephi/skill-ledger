@@ -17,6 +17,7 @@ export default function SkillNameInlineEditor({
   const [isEditingName, setIsEditingName] = useState(false);
   const [
     nameInputValue,
+    nameNormalizedValue,
     nameInputIsInvalid,
     nameInputErrorMessage,
     handleNameInputChange,
@@ -32,7 +33,7 @@ export default function SkillNameInlineEditor({
 
     if (nameInputIsInvalid) return;
 
-    onSaveName(nameInputValue.trim());
+    onSaveName(nameNormalizedValue);
     setIsEditingName(false);
   }
 
