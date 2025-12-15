@@ -13,6 +13,7 @@ const skills: Skill[] = [
         name: "Refonte du router",
         typeId: "cours",
         date: new Date("2025-03-12"),
+        
       },
       {
         id: "js-2",
