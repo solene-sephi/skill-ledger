@@ -89,13 +89,13 @@ const skills: Skill[] = [
         id: "pat-1",
         name: "Cours sur les choux",
         typeId: "cours",
-        date: new Date("2025-03-08"),
+        date: new Date("2025-12-15"),
       },
       {
         id: "pat-2",
         name: "Vidéo sur le tempérage du chocolat",
         typeId: "article",
-        date: new Date("2025-02-27"),
+        date: new Date("2025-12-10"),
       },
       {
         id: "pat-3",
