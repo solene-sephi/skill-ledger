@@ -33,7 +33,6 @@ export default function AddSkillForm({ onAdd }: AddSkillFormProps) {
       id: crypto.randomUUID(),
       name: nameNormalizedValue,
       tags,
-      actionNb: 0,
       recentProgress: "",
       actions: [],
     };
