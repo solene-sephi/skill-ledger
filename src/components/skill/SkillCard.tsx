@@ -8,11 +8,13 @@ interface SkillCardProps {
 }
 
 export default function SkillCard({ skill }: SkillCardProps) {
+  const actionCount = skill.actions.length;
+
   return (
     <div className="p-4 border border-grey-500 space-y-2">
       <h2 className="text-xl font-bold">{skill.name}</h2>
       <p className="text-sm text-grey-900 flex items-baseline justify-between">
-        {skill.actionNb} actions
+        {actionCount} actions
         <span className="text-black text-xs">{skill.recentProgress}</span>
       </p>
 

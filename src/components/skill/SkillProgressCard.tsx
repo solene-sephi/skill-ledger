@@ -7,6 +7,8 @@ interface SkillProgressCardProps {
 }
 
 export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
+  const actionCount = skill.actions.length;
+
   return (
     <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-5">
       <div className="flex items-center justify-between">
@@ -21,7 +23,7 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
             <p className="text-xs uppercase tracking-wide text-grey-700">
               Actions complétées
             </p>
-            <p className="text-xl font-bold text-grey-900">{skill.actionNb}</p>
+            <p className="text-xl font-bold text-grey-900">{actionCount}</p>
           </div>
         </div>
         <div className="px-2 py-2 flex items-center justify-between border-l border-grey-500">

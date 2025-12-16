@@ -7,10 +7,10 @@ import SkillCard from "../components/skill/SkillCard";
 export default function Dashboard() {
   const [skillsList, setSkillsList] = useState<Skill[]>(() => getAllSkills());
   const totalSkills = skillsList.length;
-  const totalActions = skillsList.reduce(
-    (sum, { actionNb }) => sum + actionNb,
-    0
-  );
+  const totalActions = skillsList.reduce((sum, skill) => {
+    const { actions } = skill;
+    return sum + actions.length;
+  }, 0);
   const hasSkills = totalSkills > 0;
 
   function handleAddSkill(skill: Skill) {
