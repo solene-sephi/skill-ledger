@@ -35,10 +35,10 @@ export default function Tag({
   className = "",
   ...props
 }: TagProps) {
-  const classes = colorsClasses[variant];
+  const colors = colorsClasses[variant];
   const sizing = sizeClasses[size];
   return (
-    <span {...props} className={`rounded-md ${sizing} ${className} ${classes}`}>
+    <span {...props} className={`rounded-md ${sizing} ${className} ${colors}`}>
       {label}
       {onRemove && (
         <button

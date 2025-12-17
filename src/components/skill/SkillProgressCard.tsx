@@ -2,6 +2,7 @@ import { getFormattedRecentProgress } from "../../services/skillProgress";
 import type { Skill } from "../../types/Skill";
 import MilestoneProgress from "../MilestoneProgress";
 import { RiArrowRightUpLine } from "react-icons/ri";
+import InfoTooltip from "../ui/InfoTooltip";
 
 interface SkillProgressCardProps {
   skill: Skill;
@@ -29,11 +30,16 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
             <p className="text-xl font-bold text-grey-900">{actionCount}</p>
           </div>
         </div>
-        <div className="px-2 py-2 flex items-center justify-between border-l border-grey-500">
+        <div className="px-2 py-2 border-l border-grey-500 relative">
+          <InfoTooltip
+            className="absolute top-2 right-2"
+            text={"Calcul en jours glissants"}
+            tooltipId="calculation-type-info"
+          />
+          <p className="text-xs uppercase tracking-wide text-grey-700">
+            Progrès récent
+          </p>
           <div>
-            <p className="text-xs uppercase tracking-wide text-grey-700">
-              Progrès récent
-            </p>
             <p className="text-xl font-bold text-grey-900">
               <span className="inline-flex items-center gap-1">
                 <RiArrowRightUpLine className="text-green-600" />
