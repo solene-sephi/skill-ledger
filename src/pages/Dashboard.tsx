@@ -3,14 +3,12 @@ import AddSkillForm from "../components/skill/AddSkillForm";
 import { useState } from "react";
 import type { Skill } from "../types/Skill";
 import SkillCard from "../components/skill/SkillCard";
+import { countActionsAcrossSkills } from "../services/skillProgress";
 
 export default function Dashboard() {
   const [skillsList, setSkillsList] = useState<Skill[]>(() => getAllSkills());
   const totalSkills = skillsList.length;
-  const totalActions = skillsList.reduce((sum, skill) => {
-    const { actions } = skill;
-    return sum + actions.length;
-  }, 0);
+  const totalActions = countActionsAcrossSkills(skillsList);
   const hasSkills = totalSkills > 0;
 
   function handleAddSkill(skill: Skill) {

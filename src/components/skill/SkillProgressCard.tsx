@@ -1,6 +1,9 @@
-import { getFormattedRecentProgress } from "../../services/skillProgress";
+import {
+  getFormattedRecentProgress,
+  countActions,
+} from "../../services/skillProgress";
 import type { Skill } from "../../types/Skill";
-import MilestoneProgress from "../MilestoneProgress";
+import MilestoneProgress from "./MilestoneProgress";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import InfoTooltip from "../ui/InfoTooltip";
 
@@ -10,7 +13,7 @@ interface SkillProgressCardProps {
 
 export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
   const actions = skill.actions;
-  const actionCount = actions.length;
+  const actionCount = countActions(actions);
   const recentProgress = getFormattedRecentProgress(actions);
 
   return (
@@ -59,7 +62,7 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
       </div>
 
       <div className="p-4 bg-white mt-3">
-        <MilestoneProgress />
+        <MilestoneProgress actions={actions} />
       </div>
     </div>
   );

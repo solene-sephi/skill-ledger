@@ -2,13 +2,14 @@ import { Link } from "react-router";
 import type { Skill } from "../../types/Skill";
 import Button from "../ui/Button";
 import SkillTagList from "./SkillTagList";
+import { countActions } from "../../services/skillProgress";
 
 interface SkillCardProps {
   skill: Skill;
 }
 
 export default function SkillCard({ skill }: SkillCardProps) {
-  const actionCount = skill.actions.length;
+  const actionCount = countActions(skill.actions);
 
   return (
     <div className="p-4 border border-grey-500 space-y-2">

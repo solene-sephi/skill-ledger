@@ -1,4 +1,18 @@
-import type { SkillAction } from "../types/Skill";
+import type { Skill, SkillAction } from "../types/Skill";
+
+export function countActions(actions: SkillAction[]): number {
+  return actions.length;
+}
+
+export const countActionsInSkill = (skill: Skill) =>
+  countActions(skill.actions);
+
+export function countActionsAcrossSkills(skills: Skill[]) {
+  return skills.reduce((sum, skill) => {
+    const { actions } = skill;
+    return sum + actions.length;
+  }, 0);
+}
 
 export function getRecentProgress(actions: SkillAction[]): {
   count: number;
