@@ -1,4 +1,4 @@
-import type { SkillActionTypeId } from "../services/skillActionType";
+export type SkillActionTypeId = "cours" | "article" | "feedback" | "autre";
 
 export interface Skill {
   id: number | string;
@@ -17,4 +17,10 @@ export interface SkillAction {
   date: Date;
   link?: string;
   note?: string;
+}
+
+export interface Milestone {
+  level: number;
+  count: number;
+  label: string;
 }

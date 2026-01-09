@@ -1,5 +1,5 @@
-import { type SkillAction } from "../../types/Skill";
-import { getActionType } from "../../services/skillActionType";
+import type { SkillAction } from "../types";
+import { getActionType } from "../api/skillActionTypes";
 
 interface SkillHistoryCardProps {
   actions: SkillAction[];

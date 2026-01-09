@@ -1,5 +1,5 @@
 import { data, type LoaderFunctionArgs } from "react-router";
-import { getSkillById } from "../services/skills";
+import { getSkillById } from "../api/skills";
 
 export default function skillDetailLoader({ params }: LoaderFunctionArgs) {
   const idParam = params.id;

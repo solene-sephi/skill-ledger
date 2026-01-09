@@ -1,9 +1,9 @@
 import { type FormEvent, useState } from "react";
-import Button from "../ui/Button";
-import type { Skill, SkillTag } from "../../types/Skill";
-import { validateSkillName } from "../../services/skillValidation";
+import Button from "../../../components/ui/Button";
+import type { Skill, SkillTag } from "../types";
+import { validateSkillName } from "../validation/skill";
 import SkillTagsInlineEditor from "./SkillTagsInlineEditor";
-import { useTextInput } from "../../hooks/useTextInput";
+import { useTextInput } from "../hooks/useTextInput";
 
 interface AddSkillFormProps {
   onAdd: (skill: Skill) => void;

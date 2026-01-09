@@ -1,17 +1,17 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { type SkillAction } from "../../types/Skill";
-import Button from "../ui/Button";
+import type { SkillAction } from "../types";
+import Button from "../../../components/ui/Button";
 import {
   validateSkillActionLink,
   validateSkillActionName,
   validateSkillActionNote,
-} from "../../services/skillActionValidation";
-import { useTextInput } from "../../hooks/useTextInput";
+} from "../validation/action";
+import { useTextInput } from "../hooks/useTextInput";
 import {
   getActionType,
   getAllActionTypes,
-  type SkillActionTypeId,
-} from "../../services/skillActionType";
+} from "../api/skillActionTypes";
+import type { SkillActionTypeId } from "../types";
 
 interface AddActionFormProps {
   onAdd: (action: SkillAction) => void;

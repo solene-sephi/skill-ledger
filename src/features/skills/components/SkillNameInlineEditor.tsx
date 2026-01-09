@@ -1,9 +1,9 @@
 import { RiPencilFill } from "react-icons/ri";
 import { useState, type FormEvent } from "react";
 import { FaCheck } from "react-icons/fa";
-import Button from "../ui/Button";
-import { useTextInput } from "../../hooks/useTextInput";
-import { validateSkillName } from "../../services/skillValidation";
+import Button from "../../../components/ui/Button";
+import { useTextInput } from "../hooks/useTextInput";
+import { validateSkillName } from "../validation/skill";
 
 interface SkillNameInlineEditorProps {
   skillName: string;

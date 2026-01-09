@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
-import type { SkillTag } from "../types/Skill";
-import { validateTag } from "../services/skillTagValidation";
+import type { SkillTag } from "../types";
+import { validateTag } from "../validation/tag";
 
 export function useTagInput(
   initialTags: SkillTag[] = [],

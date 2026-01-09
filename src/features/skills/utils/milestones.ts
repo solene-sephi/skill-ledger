@@ -1,24 +1,9 @@
-import type { SkillAction } from "../types/Skill";
-import { countActions } from "./skillProgress";
-
-const milestones: Milestone[] = [
-  { level: 1, count: 1, label: "Débutant du quotidien" },
-  { level: 2, count: 5, label: "Chercheur d’élan" },
-  { level: 3, count: 10, label: "Forgeur d’habitudes" },
-  { level: 4, count: 20, label: "Gardien du rythme" },
-  { level: 5, count: 35, label: "Pilier de constance" },
-  { level: 6, count: 50, label: "Architecte de progrès" },
-  { level: 7, count: 75, label: "Maître du flux" },
-];
-
-interface Milestone {
-  level: number;
-  count: number;
-  label: string;
-}
+import type { Milestone, SkillAction } from "../types";
+import { getMilestonesMock } from "../data/milestones";
+import { countActions } from "./progress";
 
 export function getAllMilestones(): Milestone[] {
-  return milestones;
+  return getMilestonesMock();
 }
 
 /**
@@ -38,7 +23,7 @@ export function computeMilestoneData(actions: SkillAction[]): {
   const totalActions = countActions(actions);
   const milestonesList = getAllMilestones();
 
-  const nextMilestoneIndex = milestones.findIndex(
+  const nextMilestoneIndex = milestonesList.findIndex(
     (milestone) => totalActions < milestone.count
   );
 

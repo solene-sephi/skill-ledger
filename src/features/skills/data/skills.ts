@@ -1,4 +1,4 @@
-import type { Skill } from "../types/Skill";
+import type { Skill } from "../types";
 
 const skills: Skill[] = [
   {
@@ -273,10 +273,9 @@ const skills: Skill[] = [
   },
 ];
 
-export function getAllSkills(): Skill[] {
-  return skills;
-}
-
-export function getSkillById(id: number): Skill | undefined {
-  return skills.find((skill) => skill.id === id);
+export function getSkillsMock(): Skill[] {
+  return skills.map((skill) => ({
+    ...skill,
+    actions: skill.actions.map((action) => ({ ...action })),
+  }));
 }

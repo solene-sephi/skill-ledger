@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "./layouts/RootLayout";
-import Dashboard from "./pages/Dashboard";
-import skillDetailLoader from "./pages/SkillDetail.loader";
-import SkillDetail from "./pages/SkillDetail";
+import Dashboard from "../features/skills/routes/Dashboard";
+import skillDetailLoader from "../features/skills/routes/SkillDetail.loader";
+import SkillDetail from "../features/skills/routes/SkillDetail";
 
 export const router = createBrowserRouter([
   {

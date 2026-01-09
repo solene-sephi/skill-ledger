@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router";
-import { type Skill, type SkillAction, type SkillTag } from "../types/Skill";
-import SkillNameInlineEditor from "../components/skill/SkillNameInlineEditor";
+import type { Skill, SkillAction, SkillTag } from "../types";
+import SkillNameInlineEditor from "../components/SkillNameInlineEditor";
 import { useState } from "react";
-import SkillTagsInlineEditor from "../components/skill/SkillTagsInlineEditor";
-import SkillHistoryCard from "../components/skill/SkillHistoryCard";
-import SkillProgressCard from "../components/skill/SkillProgressCard";
-import AddActionForm from "../components/skill/AddActionForm";
+import SkillTagsInlineEditor from "../components/SkillTagsInlineEditor";
+import SkillHistoryCard from "../components/SkillHistoryCard";
+import SkillProgressCard from "../components/SkillProgressCard";
+import AddActionForm from "../components/AddActionForm";
 
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
