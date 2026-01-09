@@ -1,6 +1,6 @@
-import type { SkillTag } from "../../types/Skill";
-import type { TagSize, TagVariant } from "../ui/Tag";
-import Tag from "../ui/Tag";
+import type { SkillTag } from "../types";
+import type { TagSize, TagVariant } from "../../../components/ui/Tag";
+import Tag from "../../../components/ui/Tag";
 
 interface SkillTagListProps {
   tags: SkillTag[];

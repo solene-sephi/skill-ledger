@@ -1,8 +1,8 @@
 import { FaPlus } from "react-icons/fa";
-import Button from "../ui/Button";
+import Button from "../../../components/ui/Button";
 import SkillTagList from "./SkillTagList";
-import type { SkillTag } from "../../types/Skill";
-import { useTagInput } from "../../hooks/useTagInput";
+import type { SkillTag } from "../types";
+import { useTagInput } from "../hooks/useTagInput";
 
 interface SkillTagsInlineEditorProps {
   initialTags: SkillTag[];

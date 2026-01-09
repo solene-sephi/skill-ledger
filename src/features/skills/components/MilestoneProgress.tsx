@@ -1,5 +1,5 @@
-import { getMilestoneStatus } from "../../services/milestones";
-import type { SkillAction } from "../../types/Skill";
+import { getMilestoneStatus } from "../utils/milestones";
+import type { SkillAction } from "../types";
 
 interface MilestoneProgressProps {
   actions: SkillAction[];

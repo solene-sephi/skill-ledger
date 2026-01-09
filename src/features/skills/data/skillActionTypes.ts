@@ -4,8 +4,9 @@ import {
   RiMessage2Line,
   RiQuestionLine,
 } from "react-icons/ri";
+import type { SkillActionTypeId } from "../types";
 
-export type SkillActionTypeId = "cours" | "article" | "feedback" | "autre";
+export const FALLBACK_ACTION_TYPE_ID: SkillActionTypeId = "autre";
 
 const colorVariants = {
   orange: {
@@ -26,47 +27,35 @@ const colorVariants = {
   },
 };
 
-// Main list of action types (could come from API/DB later)
 const SKILL_ACTION_TYPES = [
   {
-    id: "cours",
+    id: "cours" as SkillActionTypeId,
     label: "Cours",
     icon: RiBookOpenLine,
     colorVariant: colorVariants.orange,
   },
   {
-    id: "article",
+    id: "article" as SkillActionTypeId,
     label: "Article",
     icon: RiArticleLine,
     colorVariant: colorVariants.green,
   },
   {
-    id: "feedback",
+    id: "feedback" as SkillActionTypeId,
     label: "Feedback",
     icon: RiMessage2Line,
     colorVariant: colorVariants.berry,
   },
   {
-    id: "autre",
+    id: "autre" as SkillActionTypeId,
     label: "Autre",
     icon: RiQuestionLine,
     colorVariant: colorVariants.grey,
   },
 ] as const;
 
-// Index for quick lookup by id; not exported
-const SKILL_ACTION_TYPES_BY_ID = Object.fromEntries(
-  SKILL_ACTION_TYPES.map((t) => [t.id, t])
-);
+export type SkillActionType = (typeof SKILL_ACTION_TYPES)[number];
 
-export function getActionType(id: string) {
-  const type = SKILL_ACTION_TYPES_BY_ID[id];
-
-  if (!type) return SKILL_ACTION_TYPES_BY_ID.autre;
-
-  return type;
-}
-
-export function getAllActionTypes() {
+export function getSkillActionTypesMock(): readonly SkillActionType[] {
   return SKILL_ACTION_TYPES;
 }

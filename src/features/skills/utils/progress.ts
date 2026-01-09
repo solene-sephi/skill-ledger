@@ -1,4 +1,4 @@
-import type { Skill, SkillAction } from "../types/Skill";
+import type { Skill, SkillAction } from "../types";
 
 export function countActions(actions: SkillAction[]): number {
   return actions.length;

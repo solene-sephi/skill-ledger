@@ -1,9 +1,9 @@
-import { getAllSkills } from "../services/skills";
-import AddSkillForm from "../components/skill/AddSkillForm";
+import { getAllSkills } from "../api/skills";
+import AddSkillForm from "../components/AddSkillForm";
 import { useState } from "react";
-import type { Skill } from "../types/Skill";
-import SkillCard from "../components/skill/SkillCard";
-import { countActionsAcrossSkills } from "../services/skillProgress";
+import type { Skill } from "../types";
+import SkillCard from "../components/SkillCard";
+import { countActionsAcrossSkills } from "../utils/progress";
 
 export default function Dashboard() {
   const [skillsList, setSkillsList] = useState<Skill[]>(() => getAllSkills());
