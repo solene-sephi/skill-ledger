@@ -9,9 +9,7 @@ interface MilestoneProgressProps {
   };
 }
 
-export default function MilestoneProgress({
-  status,
-}: MilestoneProgressProps) {
+export default function MilestoneProgress({ status }: MilestoneProgressProps) {
   const {
     currentMilestone,
     nextMilestone,
@@ -41,6 +39,11 @@ export default function MilestoneProgress({
         <progress
           value={progressPercentage}
           max={100}
+          aria-label={
+            nextMilestone
+              ? `Progression vers ${nextMilestone.label}`
+              : "Progression du palier actuel"
+          }
           className="flex-1 h-2 bg-grey-500/60 [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-grey-500/60 [&::-webkit-progress-value]:bg-orange-600"
         />
         {nextMilestone && (
