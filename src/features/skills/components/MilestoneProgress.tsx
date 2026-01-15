@@ -44,7 +44,8 @@ export default function MilestoneProgress({ status }: MilestoneProgressProps) {
               ? `Progression vers ${nextMilestone.label}`
               : "Progression du palier actuel"
           }
-          className="flex-1 h-2 bg-grey-500/60 [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-grey-500/60 [&::-webkit-progress-value]:bg-orange-600"
+          className="flex-1 h-2 bg-grey-500/60 [&::-webkit-progress-bar]:bg-grey-500/60 [&::-webkit-progress-value]:bg-orange-600 
+          [&::-moz-progress-bar]:bg-orange-600"
         />
         {nextMilestone && (
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-grey-900 text-white text-sm font-bold">
