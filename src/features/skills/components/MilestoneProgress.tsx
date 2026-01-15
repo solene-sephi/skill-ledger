@@ -39,13 +39,8 @@ export default function MilestoneProgress({ status }: MilestoneProgressProps) {
         <progress
           value={progressPercentage}
           max={100}
-          aria-label={
-            nextMilestone
-              ? `Progression vers ${nextMilestone.label}`
-              : "Progression du palier actuel"
-          }
-          className="flex-1 h-2 bg-grey-500/60 [&::-webkit-progress-bar]:bg-grey-500/60 [&::-webkit-progress-value]:bg-orange-600 
-          [&::-moz-progress-bar]:bg-orange-600"
+          aria-label="Progression"
+          className="milestone-progress"
         />
         {nextMilestone && (
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-grey-900 text-white text-sm font-bold">
