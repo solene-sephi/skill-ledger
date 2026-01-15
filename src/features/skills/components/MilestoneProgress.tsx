@@ -1,17 +1,23 @@
-import { getMilestoneStatus } from "../utils/milestones";
-import type { SkillAction } from "../types";
+import type { Milestone } from "../types";
 
 interface MilestoneProgressProps {
-  actions: SkillAction[];
+  status: {
+    currentMilestone: Milestone | null;
+    nextMilestone: Milestone | null;
+    progressPercentage: number;
+    remainingActions: number;
+  };
 }
 
-export default function MilestoneProgress({ actions }: MilestoneProgressProps) {
+export default function MilestoneProgress({
+  status,
+}: MilestoneProgressProps) {
   const {
     currentMilestone,
     nextMilestone,
     progressPercentage,
     remainingActions,
-  } = getMilestoneStatus(actions);
+  } = status;
 
   return (
     <div className="space-y-2">
