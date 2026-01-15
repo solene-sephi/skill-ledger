@@ -3,7 +3,7 @@ import type { Skill } from "../types";
 import MilestoneProgress from "./MilestoneProgress";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import InfoTooltip from "../../../components/ui/InfoTooltip";
-import { getCurrentMilestone } from "../utils/milestones";
+import { getCurrentMilestone, getMilestoneStatus } from "../utils/milestones";
 
 interface SkillProgressCardProps {
   skill: Skill;
@@ -14,6 +14,7 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
   const actionCount = countActions(actions);
   const recentProgress = getFormattedRecentProgress(actions);
   const currentMilestone = getCurrentMilestone(actions);
+  const milestoneStatus = getMilestoneStatus(actions);
 
   return (
     <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-5">
@@ -63,7 +64,7 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
       </div>
 
       <div className="p-4 bg-white mt-3">
-        <MilestoneProgress actions={actions} />
+        <MilestoneProgress status={milestoneStatus} />
       </div>
     </div>
   );
