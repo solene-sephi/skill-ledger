@@ -1,0 +1,26 @@
+@layer components {
+  .form-base {
+    @apply space-y-4;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium;
+  }
+
+  .form-label .field-spacing {
+    @apply mt-2;
+  }
+
+  .form-label .field-spacing:not(.w-full) {
+    @apply ml-2;
+  }
+
+  .input-base {
+    @apply input-size border-grey-500 focus:input-focus focus-within:input-focus focus-visible:input-focus;
+  }
+
+  /* Gabarit d'input pour que l'element ait la meme disposition qu'un input (meme hauteur/padding, bordure invisible) */
+  .input-readonly-display {
+    @apply input-size border-transparent;
+  }
+}

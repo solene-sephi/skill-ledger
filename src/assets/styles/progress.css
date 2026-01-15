@@ -1,0 +1,9 @@
+@layer components {
+  .progress-track {
+    @apply flex-1 h-2 overflow-hidden bg-grey-500/60;
+  }
+
+  .progress-fill {
+    @apply h-full bg-orange-600 transition-[width] duration-600;
+  }
+}
