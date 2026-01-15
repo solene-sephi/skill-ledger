@@ -36,12 +36,19 @@ export default function MilestoneProgress({ status }: MilestoneProgressProps) {
           </div>
         )}
 
-        <progress
-          value={progressPercentage}
-          max={100}
+        <div
+          role="progressbar"
           aria-label="Progression"
-          className="milestone-progress"
-        />
+          aria-valuenow={Math.round(progressPercentage)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          className="progress-track"
+        >
+          <div
+            className="progress-fill"
+            style={{ width: `${progressPercentage}%` }}
+          />
+        </div>
         {nextMilestone && (
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-grey-900 text-white text-sm font-bold">
             {nextMilestone.level}

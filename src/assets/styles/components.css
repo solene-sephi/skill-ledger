@@ -24,19 +24,11 @@
     @apply input-size border-transparent;
   }
 
-  .milestone-progress {
-    @apply flex-1 h-2 bg-grey-500/60;
+  .progress-track {
+    @apply flex-1 h-2 overflow-hidden bg-grey-500/60;
   }
 
-  .milestone-progress::-webkit-progress-bar {
-    @apply bg-grey-500/60;
-  }
-
-  .milestone-progress::-webkit-progress-value {
-    @apply bg-orange-600 transition-[width] duration-600;
-  }
-
-  .milestone-progress::-moz-progress-bar {
-    @apply bg-orange-600;
+  .progress-fill {
+    @apply h-full bg-orange-600 transition-[width] duration-600;
   }
 }
