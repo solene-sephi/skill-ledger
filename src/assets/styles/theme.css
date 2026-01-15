@@ -23,4 +23,23 @@
   /* Accents */
   --color-lavender-500: #8d6a9f;
   --color-berry-500: #b8336a;
+
+  /* Animations */
+  --animate-puff-out-center: puff-out-center 1.6s
+    cubic-bezier(0.165, 0.84, 0.44, 1)
+    both;
+
+  @keyframes puff-out-center {
+    0%,
+    55% {
+      transform: scale(1);
+      filter: blur(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      filter: blur(4px);
+      opacity: 0;
+    }
+  }
 }

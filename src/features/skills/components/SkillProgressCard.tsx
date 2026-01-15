@@ -7,9 +7,15 @@ import { getCurrentMilestone, getMilestoneStatus } from "../utils/milestones";
 
 interface SkillProgressCardProps {
   skill: Skill;
+  showPlusOne: boolean;
+  onPlusOneAnimationEnd: () => void;
 }
 
-export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
+export default function SkillProgressCard({
+  skill,
+  showPlusOne,
+  onPlusOneAnimationEnd,
+}: SkillProgressCardProps) {
   const actions = skill.actions;
   const actionCount = countActions(actions);
   const recentProgress = getFormattedRecentProgress(actions);
@@ -27,10 +33,23 @@ export default function SkillProgressCard({ skill }: SkillProgressCardProps) {
       <div className="grid gap-3 md:grid-cols-3 pb-4 border-b border-grey-500">
         <div className="px-2 py-2 flex items-center justify-between">
           <div>
-            <p className="text-xs uppercase tracking-wide text-grey-700">
+            <p className="text-xs uppercase tracking-wide text-grey-700 relative">
               Actions complétées
             </p>
-            <p className="text-xl font-bold text-grey-900">{actionCount}</p>
+            <p className="text-xl font-bold text-grey-900">
+              <span className="inline-flex items-center gap-2">
+                {actionCount}
+                {showPlusOne && (
+                  <span
+                    onAnimationEnd={onPlusOneAnimationEnd}
+                    aria-hidden="true"
+                    className="text-sm font-bold text-orange-600 animate-puff-out-center"
+                  >
+                    +1
+                  </span>
+                )}
+              </span>
+            </p>
           </div>
         </div>
         <div className="px-2 py-2 border-l border-grey-500 relative">

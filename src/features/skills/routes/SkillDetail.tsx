@@ -10,6 +10,7 @@ import AddActionForm from "../components/AddActionForm";
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
   const [newSkill, setNewSkill] = useState(skill);
+  const [showPlusOne, setShowPlusOne] = useState(false);
 
   function handleUpdateName(nextName: string) {
     setNewSkill((prev) => ({ ...prev, name: nextName }));
@@ -22,6 +23,8 @@ export default function SkillDetail() {
 
   function handleAddAction(newAction: SkillAction) {
     setNewSkill((prev) => ({ ...prev, actions: [newAction, ...prev.actions] }));
+
+    setShowPlusOne(true);
   }
 
   return (
@@ -46,7 +49,11 @@ export default function SkillDetail() {
         {/* Progression block */}
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8 space-y-6">
-            <SkillProgressCard skill={newSkill} />
+            <SkillProgressCard
+              skill={newSkill}
+              showPlusOne={showPlusOne}
+              onPlusOneAnimationEnd={() => setShowPlusOne(false)}
+            />
 
             <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-4">
               <h3 className="text-xl uppercase tracking-wide text-grey-800">
