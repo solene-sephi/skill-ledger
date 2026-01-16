@@ -24,51 +24,45 @@ export default function SkillProgressCard({
   return (
     <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl uppercase tracking-wide text-grey-800">
+        <h3 className="text-lg uppercase tracking-wide text-grey-800">
           Progression
         </h3>
       </div>
 
-      <div className="grid gap-1 md:grid-cols-2 border-b border-grey-500 pb-2">
-        <div className="py-1 flex items-center justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-grey-700 relative">
-              Actions complétées
-            </p>
-            <p className="text-xl font-bold text-grey-900">
-              <span className="inline-flex items-center gap-2">
-                {actionCount}
-                {showPlusOne && (
-                  <span
-                    onAnimationEnd={onPlusOneAnimationEnd}
-                    aria-hidden="true"
-                    className="text-sm font-bold text-orange-600 animate-puff-out-center"
-                  >
-                    +1
-                  </span>
-                )}
+      <div className="relative flex flex-col gap-3 border-b border-grey-500 pb-2 text-base text-grey-800 md:flex-row md:items-center md:justify-between">
+        <span className="inline-flex items-center gap-2">
+          <span className="text-grey-800 whitespace-nowrap">
+            Actions complétées :
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <span className="text-base font-semibold text-grey-800">
+              {actionCount}
+            </span>
+            {showPlusOne && (
+              <span
+                onAnimationEnd={onPlusOneAnimationEnd}
+                aria-hidden="true"
+                className="text-sm font-semibold text-orange-600 animate-puff-out-center"
+              >
+                +1
               </span>
-            </p>
-          </div>
-        </div>
-        <div className="py-1 border-l border-grey-500 relative pl-3">
+            )}
+          </span>
+        </span>
+        <span
+          className="hidden md:block absolute left-1/2 top-1/2 h-4 -translate-x-1/2 -translate-y-1/2 border-l border-grey-500"
+          aria-hidden="true"
+        />
+        <span className="inline-flex items-center gap-2 md:justify-end">
+          <RiArrowRightUpLine className="text-green-600" />
+          <span className="font-semibold text-grey-800">{recentProgress}</span>
           <InfoTooltip
-            className="absolute top-2 right-2"
+            className="ml-1"
+            iconClassName="size-4 md:size-4"
             text={"Calcul en jours glissants"}
             tooltipId="calculation-type-info"
           />
-          <p className="text-xs uppercase tracking-wide text-grey-700">
-            Progrès récent
-          </p>
-          <div>
-            <p className="text-xl font-bold text-grey-900">
-              <span className="inline-flex items-center gap-1">
-                <RiArrowRightUpLine className="text-green-600" />
-                {recentProgress}
-              </span>
-            </p>
-          </div>
-        </div>
+        </span>
       </div>
 
       <div className="bg-white pt-2">

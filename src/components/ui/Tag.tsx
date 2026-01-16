@@ -16,10 +16,10 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const colorsClasses: Record<TagVariant, string> = {
-  primaryOutline: "bg-white text-black border-2 border-orange-500",
-  secondary: "bg-green-400 text-black border-2 border-green-400",
-  secondaryOutline: "bg-white text-black border-2 border-green-500",
-  tertiaryOutline: "text-black bg-white border-2 border-grey-900",
+  primaryOutline: "bg-white text-grey-800 border-2 border-orange-500",
+  secondary: "bg-green-400 text-grey-800 border-2 border-green-400",
+  secondaryOutline: "bg-white text-grey-800 border-2 border-green-500",
+  tertiaryOutline: "text-grey-800 bg-white border-2 border-grey-900",
 };
 
 const sizeClasses: Record<NonNullable<TagProps["size"]>, string> = {

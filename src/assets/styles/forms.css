@@ -3,6 +3,10 @@
     @apply space-y-4;
   }
 
+  .form-compact {
+    @apply space-y-3;
+  }
+
   .form-label {
     @apply block text-sm font-medium;
   }
@@ -13,6 +17,14 @@
 
   .form-label .field-spacing:not(.w-full) {
     @apply ml-2;
+  }
+
+  .form-compact .field-spacing {
+    @apply mt-1;
+  }
+
+  .form-compact .field-spacing:not(.w-full) {
+    @apply ml-1;
   }
 
   .input-base {

@@ -22,7 +22,7 @@ export default function MilestoneProgress({ status }: MilestoneProgressProps) {
       <div
         className={`flex ${
           currentMilestone ? "justify-between" : "justify-end"
-        } text-sm`}
+        } text-sm text-grey-700`}
       >
         {currentMilestone && <span>{currentMilestone.label}</span>}
         {nextMilestone && (
@@ -58,7 +58,7 @@ export default function MilestoneProgress({ status }: MilestoneProgressProps) {
 
       {remainingActions > 0 && (
         <div className="flex justify-end">
-          <p className="text-xs text-grey-900/80">
+          <p className="text-sm text-grey-700">
             Encore {remainingActions} action{remainingActions > 1 && "s"}
           </p>
         </div>

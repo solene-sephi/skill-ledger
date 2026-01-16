@@ -87,7 +87,7 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form-base">
+    <form onSubmit={handleSubmit} className="form-base form-compact">
       <label className="form-label">
         Type <span className="text-red-600">*</span>
         <select
@@ -140,7 +140,7 @@ export default function AddActionForm({ onAdd }: AddActionFormProps) {
         Note (optionnel)
         <textarea
           name="note"
-          className="input-base field-spacing w-full min-h-24"
+          className="input-base field-spacing w-full min-h-20"
           value={noteInputValue}
           onChange={handleNoteChange}
           onBlur={handleNoteBlur}

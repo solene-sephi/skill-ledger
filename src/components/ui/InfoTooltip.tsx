@@ -5,6 +5,7 @@ interface InfoTooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
   text: string;
   position?: "top" | "bottom" | "left" | "right";
   tooltipId: string;
+  iconClassName?: string;
 }
 
 const positionClasses = {
@@ -19,6 +20,7 @@ export default function InfoTooltip({
   position = "top",
   tooltipId,
   className,
+  iconClassName,
 }: InfoTooltipProps) {
   const [visible, setVisible] = useState(false);
   const positioning = positionClasses[position];
@@ -39,7 +41,7 @@ export default function InfoTooltip({
           aria-label="Information supplémentaire"
           aria-describedby={tooltipId}
         >
-          <FiInfo className="size-6 md:size-4" />
+          <FiInfo className={iconClassName ?? "size-6 md:size-4"} />
         </button>
         <span
           role="tooltip"
