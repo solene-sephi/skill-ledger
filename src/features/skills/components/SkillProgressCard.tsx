@@ -19,19 +19,18 @@ export default function SkillProgressCard({
   const actions = skill.actions;
   const actionCount = countActions(actions);
   const recentProgress = getFormattedRecentProgress(actions);
-  const currentMilestone = getCurrentMilestone(actions);
   const milestoneStatus = getMilestoneStatus(actions);
 
   return (
-    <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-5">
+    <div className="bg-white border border-grey-500 border-t-4 border-t-berry-500 p-5 space-y-3">
       <div className="flex items-center justify-between">
         <h3 className="text-xl uppercase tracking-wide text-grey-800">
           Progression
         </h3>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3 pb-4 border-b border-grey-500">
-        <div className="px-2 py-2 flex items-center justify-between">
+      <div className="grid gap-1 md:grid-cols-2 border-b border-grey-500 pb-2">
+        <div className="py-1 flex items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-wide text-grey-700 relative">
               Actions complétées
@@ -52,7 +51,7 @@ export default function SkillProgressCard({
             </p>
           </div>
         </div>
-        <div className="px-2 py-2 border-l border-grey-500 relative">
+        <div className="py-1 border-l border-grey-500 relative pl-3">
           <InfoTooltip
             className="absolute top-2 right-2"
             text={"Calcul en jours glissants"}
@@ -70,19 +69,9 @@ export default function SkillProgressCard({
             </p>
           </div>
         </div>
-        <div className="px-2 py-2 flex items-center justify-between border-l border-grey-500">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-grey-700">
-              Niveau actuel
-            </p>
-            <p className="text-xl font-bold text-grey-900">
-              {currentMilestone?.level}
-            </p>
-          </div>
-        </div>
       </div>
 
-      <div className="p-4 bg-white mt-3">
+      <div className="bg-white pt-2">
         <MilestoneProgress status={milestoneStatus} />
       </div>
     </div>

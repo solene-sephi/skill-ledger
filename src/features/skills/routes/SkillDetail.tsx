@@ -54,8 +54,7 @@ export default function SkillDetail() {
               showPlusOne={showPlusOne}
               onPlusOneAnimationEnd={() => setShowPlusOne(false)}
             />
-
-            <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-4">
+            <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-3">
               <h3 className="text-xl uppercase tracking-wide text-grey-800">
                 Ajouter une action
               </h3>
