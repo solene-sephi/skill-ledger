@@ -117,3 +117,14 @@ export function getMilestoneStatus(actions: SkillAction[]) {
 export function getCurrentMilestone(actions: SkillAction[]) {
   return computeMilestoneData(actions).currentMilestone;
 }
+
+export function milestoneLeveledUp(
+  prevActions: SkillAction[],
+  nextActions: SkillAction[]
+): boolean {
+  const levelBefore =
+    computeMilestoneData(prevActions).currentMilestone?.level ?? 0;
+  const levelAfter =
+    computeMilestoneData(nextActions).currentMilestone?.level ?? 0;
+  return levelBefore < levelAfter;
+}

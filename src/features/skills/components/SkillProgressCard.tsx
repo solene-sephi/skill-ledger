@@ -3,7 +3,7 @@ import type { Skill } from "../types";
 import MilestoneProgress from "./MilestoneProgress";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import InfoTooltip from "../../../components/ui/InfoTooltip";
-import { getCurrentMilestone, getMilestoneStatus } from "../utils/milestones";
+import { getMilestoneStatus } from "../utils/milestones";
 
 interface SkillProgressCardProps {
   skill: Skill;
