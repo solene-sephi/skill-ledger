@@ -12,15 +12,15 @@ import { milestoneLeveledUp } from "../utils/milestones";
 
 export default function SkillDetail() {
   const { skill }: { skill: Skill } = useLoaderData();
-  const [newSkill, setNewSkill] = useState(skill);
+  const [currentSkill, setCurrentSkill] = useState(skill);
   const [showPlusOne, setShowPlusOne] = useState(false);
 
   function handleUpdateName(nextName: string) {
-    setNewSkill((prev) => ({ ...prev, name: nextName }));
+    setCurrentSkill((prev) => ({ ...prev, name: nextName }));
   }
 
   function handleUpdateTags(nextTags: SkillTag[]) {
-    setNewSkill((prev) => ({ ...prev, tags: nextTags }));
+    setCurrentSkill((prev) => ({ ...prev, tags: nextTags }));
   }
 
   function handleAddAction(action: SkillAction) {
@@ -28,7 +28,7 @@ export default function SkillDetail() {
 
     let leveledUp = false;
 
-    setNewSkill((prev) => {
+    setCurrentSkill((prev) => {
       const nextActions = [savedAction, ...prev.actions];
       leveledUp = milestoneLeveledUp(prev.actions, nextActions);
 
@@ -49,15 +49,15 @@ export default function SkillDetail() {
         {/* Name + tags block */}
         <div className="bg-white border border-grey-500 border-t-4 border-t-lavender-500 p-5 space-y-3">
           <SkillNameInlineEditor
-            key={newSkill.id}
-            skillName={newSkill.name}
+            key={currentSkill.id}
+            skillName={currentSkill.name}
             onSaveName={handleUpdateName}
           />
 
           <div className="border-t border-grey-500 space-y-3 pt-4">
             <SkillTagsInlineEditor
-              key={newSkill.id}
-              initialTags={newSkill.tags}
+              key={currentSkill.id}
+              initialTags={currentSkill.tags}
               onTagsChange={handleUpdateTags}
             />
           </div>
@@ -66,8 +66,8 @@ export default function SkillDetail() {
         {/* Progression + Add action + History */}
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8 space-y-6">
-            <SkillProgressCard
-              skill={newSkill}
+              <SkillProgressCard
+              skill={currentSkill}
               showPlusOne={showPlusOne}
               onPlusOneAnimationEnd={() => setShowPlusOne(false)}
             />
@@ -82,7 +82,7 @@ export default function SkillDetail() {
           </div>
 
           <div className="lg:col-span-4">
-            <SkillHistoryCard actions={newSkill.actions} />
+            <SkillHistoryCard actions={currentSkill.actions} />
           </div>
         </div>
       </div>
